@@ -8,5 +8,6 @@ public class Main {
         System.out.println("Werkt dit?");
         System.out.println("ja geweldig");
         System.out.println("ik hou van heuristieken");
+        System.out.println("lacheeen");
     }
 }
