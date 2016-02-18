@@ -6,7 +6,10 @@ public class Main {
 
     public static void main(String[] args) {
         genome = createGenome();
-        invert(4,8);
+        checkFrontAndBack();
+        for(int i = 0; i<25;i++){
+            System.out.println(genome[i]);
+        }
     }
 
     private static int[] createGenome(){
@@ -36,20 +39,14 @@ public class Main {
                 break;
             }
         }
-        for(int i = 0; i<25;i++){
-            System.out.println(genome[i]);
-        }
     }
-
 
     private static void checkFrontAndBack() {
         for(int i = 0; i < 12; i++){
             checkFront(i+1);
             checkBack(25-i);
         }
-
     }
-}
 
     private static void checkFront(int m) {
         for (int i = 0; i < 25; i++) {
