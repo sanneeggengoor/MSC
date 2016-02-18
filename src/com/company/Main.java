@@ -41,6 +41,14 @@ public class Main {
         }
     }
 
+
+    private static void checkFrontAndBack() {
+        for(int i = 0; i < 12; i++){
+            checkFront(i+1);
+            checkBack(25-i);
+        }
+
+    }
 }
 
     private static void checkFront(int m) {
