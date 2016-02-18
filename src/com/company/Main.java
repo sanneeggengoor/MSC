@@ -24,7 +24,7 @@ public class Main {
     private static void invert(int a, int b){
         int[] inverseGen= new int[25];
         for(int i = a; i<=b; i++){
-            
+
         }
         System.out.println
         for(int i = 0; i < 25; i++){
