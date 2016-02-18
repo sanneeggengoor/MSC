@@ -27,4 +27,12 @@ public class Main {
             genome[i-1]=inverseGen[i-1];
         }
     }
+
+    private static void checkFrontAndBack() {
+        for(int i = 0; i < 12; i++){
+            checkFront(i+1);
+            checkBack(25-i);
+        }
+
+    }
 }
