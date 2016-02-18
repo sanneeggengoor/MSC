@@ -5,7 +5,7 @@ public class Main {
     private static int[] genome;
     public static void main(String[] args) {
         genome = createGenome();
-        invert(4,8);
+
     }
 
     private static int[] createGenome(){
@@ -27,4 +27,17 @@ public class Main {
             genome[i-1]=inverseGen[i-1];
         }
     }
+
+    private static void checkBack(int num){
+        for (int i = 0; i<25; i++){
+            if(genome[i]==num){
+                invert(i+1,num);
+                break;
+            }
+        }
+        for(int i = 0; i<25;i++){
+            System.out.println(genome[i]);
+        }
+    }
+
 }
