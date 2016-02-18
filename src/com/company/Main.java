@@ -28,6 +28,19 @@ public class Main {
         }
     }
 
+    private static void checkBack(int num){
+        for (int i = 0; i<25; i++){
+            if(genome[i]==num){
+                invert(i+1,num);
+                break;
+            }
+        }
+        for(int i = 0; i<25;i++){
+            System.out.println(genome[i]);
+        }
+    }
+
+
     private static void checkFrontAndBack() {
         for(int i = 0; i < 12; i++){
             checkFront(i+1);
