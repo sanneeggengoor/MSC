@@ -8,6 +8,7 @@ public class Genome {
 
     public Genome() {
         genome = createGenome();
+        int count = 0;
     }
 
     private int[] createGenome(){
@@ -30,6 +31,13 @@ public class Genome {
         }
     }
 
+    public boolean equals(Object other){
+        return true;
+    }
+    public int hashCode() {
+        // iets met t genoom 
+        return 1;
+    }
     public String toString() {
         String rep = "";
         for (int i = 0; i < genome.length; i++) {
