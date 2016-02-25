@@ -5,11 +5,23 @@ public class Main {
     private static int[] genome;
 
     public static void main(String[] args) {
+        Genome g = new Genome();
+        System.out.println(g);
+        g.invert(3,5);
+        System.out.println(g);
+        Genome g2 = new Genome();
+        System.out.println(g);
+        System.out.println(g2);
+
+
+/*
         genome = createGenome();
         checkFrontAndBack();
+        Main main = new Main();
+        main.createGenome();
         for(int i = 0; i<25;i++){
             System.out.println(genome[i]);
-        }
+        }*/
     }
 
     private static int[] createGenome(){
