@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Genome g = new Genome();
         System.out.println(g);
-        g.invert(3,5);
+        g.invert(1,7);
         System.out.println(g);
         Genome g2 = new Genome();
         System.out.println(g);
