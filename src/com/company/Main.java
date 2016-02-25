@@ -14,14 +14,14 @@ public class Main {
         System.out.println(g2);
 
 
-/*
+
         genome = createGenome();
         checkFrontAndBack();
         Main main = new Main();
         main.createGenome();
         for(int i = 0; i<25;i++){
             System.out.println(genome[i]);
-        }*/
+        }
     }
 
     private static int[] createGenome(){
