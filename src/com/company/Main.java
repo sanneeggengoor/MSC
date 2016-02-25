@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Genome g = new Genome();
         System.out.println(g);
-        g.invert(3,5);
+        g.invert(1,7);
         System.out.println(g);
         Genome g2 = new Genome();
         System.out.println(g);
@@ -44,15 +44,6 @@ public class Main {
         }
     }
 
-    private static void checkBack(int num){
-        for (int i = 0; i<25; i++){
-            if(genome[i]==num){
-                invert(i+1,num);
-                break;
-            }
-        }
-    }
-
     private static void checkFrontAndBack() {
         for(int i = 0; i < 12; i++){
             checkFront(i+1);
@@ -64,6 +55,15 @@ public class Main {
         for (int i = 0; i < 25; i++) {
             if (genome[i] == m) {
                 invert(m, i + 1);
+                break;
+            }
+        }
+    }
+
+    private static void checkBack(int num){
+        for (int i = 0; i<25; i++){
+            if(genome[i]==num){
+                invert(i+1,num);
                 break;
             }
         }
