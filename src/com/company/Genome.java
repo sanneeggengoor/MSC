@@ -1,8 +1,5 @@
 package com.company;
 
-/**
- * Created by Sanne on 18-2-2016.
- */
 public class Genome {
     public int[] genome;
 
@@ -32,7 +29,12 @@ public class Genome {
     }
 
     public boolean equals(Object other){
-        return true;
+        for(int i = 0; i < 25; i++){
+            if(genome[i]){
+                return true;
+            }
+        }
+
     }
 
     public int hashCode() {
