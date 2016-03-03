@@ -8,7 +8,7 @@ public class Main {
         Stack genomeStack = new Stack();
         Genome gen = new Genome();
         Genome other = new Genome();
-        System.out.print(gen.compare(other));
+        System.out.print(gen.equals(other));
 
     }
 /**

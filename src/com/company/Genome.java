@@ -40,13 +40,9 @@ public class Genome {
         return child;
     }
 
-    public boolean compare(Object other){
-        String gen1 = other.toString();
-        String gen2 = this.toString();
-        if (gen1.equals(gen2)) {
-            return true;
-        }
-        return false;
+    public boolean equals(Object other){
+        return other == this;
+        // klopt nog niet!!!
     }
 
     public int hashCode() {
