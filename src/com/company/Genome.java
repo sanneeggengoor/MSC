@@ -5,13 +5,15 @@ package com.company;
  */
 public class Genome {
     public int[] genome;
+    int count;
 
     public Genome() {
         genome = createGenome();
-        int count = 0;
+        count = 0;
     }
 
     public Genome(Genome genome) {
+        genome.count = this.count;
         this.genome = new int[25];
         for(int i = 0; i < 25; i++) {
             this.genome[i] = genome.genome[i];
