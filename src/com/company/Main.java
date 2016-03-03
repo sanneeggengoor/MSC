@@ -6,7 +6,9 @@ public class Main {
 
     public static void main(String[] args) {
         Stack genomeStack = new Stack();
-
+        Genome gen = new Genome();
+        Genome other = new Genome();
+        System.out.print(gen.compare(other));
 
     }
 /**
