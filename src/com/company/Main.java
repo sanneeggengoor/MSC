@@ -5,7 +5,7 @@ public class Main {
     private static int[] genome;
 
     public static void main(String[] args) {
-        Stacks.hoi();
+        Stacks.makeStack();
         Genome g = new Genome();
         System.out.println(g);
         g.invert(1,7);
