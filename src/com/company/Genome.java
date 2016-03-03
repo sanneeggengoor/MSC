@@ -40,18 +40,24 @@ public class Genome {
         return child;
     }
 
-    public boolean equals(Object other){
-        return true;
+    public boolean compare(Object other){
+        String gen1 = other.toString();
+        String gen2 = this.toString();
+        if (gen1.equals(gen2)) {
+            return true;
+        }
+        return false;
     }
 
     public int hashCode() {
         int counter = 0;
         for(int i = 0; i<25;i++){
-            counter = counter + genome[i]*(i+1);
+            counter += genome[i]*(i+1);
         }
         counter = counter % 5000;
         return counter;
     }
+
     public String toString() {
         String rep = "";
         for (int i = 0; i < genome.length; i++) {
