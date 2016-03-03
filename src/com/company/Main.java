@@ -2,7 +2,6 @@ package com.company;
 
 public class Main {
 
-    private static int[] genome;
 
     public static void main(String[] args) {
         Stacks.makeStack();
@@ -20,7 +19,7 @@ public class Main {
  */
     }
 
-   
+
 
 /**
     private static void checkFrontAndBack() {

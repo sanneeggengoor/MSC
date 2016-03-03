@@ -11,6 +11,13 @@ public class Genome {
         int count = 0;
     }
 
+    public Genome(Genome genome) {
+        this.genome = new int[25];
+        for(int i = 0; i < 25; i++) {
+            this.genome[i] = genome.genome[i];
+        }
+    }
+
     private int[] createGenome(){
         int[] genomeCreate = {
                 23, 1, 2, 11, 24, 22, 19, 6, 10, 7, 25, 20,
@@ -20,15 +27,17 @@ public class Genome {
         return genomeCreate;
     }
 
-    public void invert(int a, int b){
+    public Genome invert(int a, int b){
         int[] inverseGen= new int[25];
+        Genome child = new Genome(this);
         for(int i = a; i<=b; i++){
             int x = b - i + a;
-            inverseGen[i-1] = genome[x-1];
+            inverseGen[i-1] = child.genome[x-1];
         }
         for(int i = a; i <= b; i++){
-            genome[i-1]=inverseGen[i-1];
+            child.genome[i-1]=inverseGen[i-1];
         }
+        return child;
     }
 
     public boolean equals(Object other){
