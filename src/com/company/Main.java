@@ -8,7 +8,7 @@ public class Main {
         Stack genomeStack = new Stack();
 
 
-
+    }
 /**
         genome = createGenome();
         checkFrontAndBack();
@@ -17,12 +17,7 @@ public class Main {
         for(int i = 0; i<25;i++){
             System.out.println(genome[i]);
         }
- */
-    }
 
-   
-
-/**
     private static void checkFrontAndBack() {
         for(int i = 0; i < 12; i++){
             checkFront(i+1);
