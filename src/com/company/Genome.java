@@ -34,9 +34,14 @@ public class Genome {
     public boolean equals(Object other){
         return true;
     }
+
     public int hashCode() {
-        // iets met t genoom 
-        return 1;
+        int counter = 0;
+        for(int i = 0; i<25;i++){
+            counter = counter + genome[i]*(i+1);
+        }
+        counter = counter % 5000;
+        return counter;
     }
     public String toString() {
         String rep = "";
