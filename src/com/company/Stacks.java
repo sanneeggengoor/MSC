@@ -6,6 +6,12 @@ package com.company;
 import java.util.*;
 
 public class Stacks {
+    Stack<Genome> genomeStack;
+
+    public void createChildrenStack(){
+        Genome parent = genomeStack.pop();
+
+    }
 
     static void showpush(Stack st, int a) {
         st.push(new Integer(a));
