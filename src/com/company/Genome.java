@@ -42,21 +42,15 @@ public class Genome {
         return child;
     }
 
-    public boolean equals(Object other){
-        for(int i = 0; i < 25; i++) {
-            if(other[i] != this[i]) {
+    public boolean equals(Object other) {
+        String gen1 = this.toString();
+        String gen2 = other.toString();
+        for (int i = 0; i < 25; i++) {
+            if (gen1.charAt(i) != gen2.charAt(i)) {
                 return false;
             }
         }
         return true;
-        // klopt nog niet!!!
-    public boolean compare(Object other){
-        String gen1 = other.toString();
-        String gen2 = this.toString();
-        if(gen1.equals(gen2)) {
-            return true;
-        }
-        return false;
     }
 
     public int hashCode() {
