@@ -23,10 +23,10 @@ public class Iterative {
 
     public void findSolution(){
         while (true){
-            if (checkIfEmpty()){
+            if (deepening.empty()){
                 maxDepth++;
                 deepening.push(gen);
-            } else if (checkIfEmpty()){
+            } else if (checkIfOk()){
                  break;
             }
             createChildrenStack();
@@ -53,7 +53,7 @@ public class Iterative {
     private boolean checkIfOk() {
         Genome state = deepening.peek();
         for (int i = 0; i < 25; i++) {
-            if (state[i] != i + 1) {
+            if (state.genome[i] != i + 1) {
                 return false;
             }
         }
