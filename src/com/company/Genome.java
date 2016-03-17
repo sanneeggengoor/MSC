@@ -1,15 +1,19 @@
 package com.company;
 
-
+/**
+ * Created by Sanne on 18-2-2016.
+ */
 public class Genome {
     public int[] genome;
+    int count;
 
     public Genome() {
         genome = createGenome();
-        int count = 0;
+        count = 0;
     }
 
     public Genome(Genome genome) {
+        genome.count = this.count;
         this.genome = new int[25];
         for(int i = 0; i < 25; i++) {
             this.genome[i] = genome.genome[i];
@@ -38,6 +42,9 @@ public class Genome {
         return child;
     }
 
+    public boolean equals(Object other){
+        return other == this;
+        // klopt nog niet!!!
     public boolean compare(Object other){
         String gen1 = other.toString();
         String gen2 = this.toString();
