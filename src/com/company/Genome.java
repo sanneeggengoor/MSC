@@ -43,6 +43,7 @@ public class Genome {
     }
 
     public boolean equals(Object other){
+        
         return other == this;
         // klopt nog niet!!!
     }

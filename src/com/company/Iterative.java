@@ -10,6 +10,7 @@ public class Iterative {
     Stack<Genome> deepening;
     HashSet<String> listAll;
     int maxDepth;
+    static int MAX;
 
     public Iterative() {
         deepening = new Stack<>();
@@ -20,17 +21,18 @@ public class Iterative {
     public void createChildrenStack(){
         Genome parent = deepening.pop();
 
-        for(int i = 0; i<25; i++)
-            for(int j = i ; j < 25; j++){
-                Genome child = parent.invert(i,j);
+        for(int i = 0; i<25; i++) {
+            for (int j = i; j < 25; j++) {
+                Genome child = parent.invert(i, j);
                 if (!listAll.contains(child)) {
                     child.count = parent.count + 1;
                     deepening.push(child);
                     listAll.add(child.toString());
                 }
             }
+        }
     }
 
 
 }
-}
+
