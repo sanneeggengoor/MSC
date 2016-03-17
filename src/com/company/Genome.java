@@ -13,7 +13,7 @@ public class Genome {
     }
 
     public Genome(Genome genome) {
-        genome.count = this.count;
+        this.count = genome.count;
         this.genome = new int[25];
         for(int i = 0; i < 25; i++) {
             this.genome[i] = genome.genome[i];
@@ -21,10 +21,15 @@ public class Genome {
     }
 
     private int[] createGenome(){
+        /*
         int[] genomeCreate = {
                 23, 1, 2, 11, 24, 22, 19, 6, 10, 7, 25, 20,
                 5, 8, 18, 12, 13, 14, 15, 16, 17,
                 21, 3, 4, 9
+        };*/
+        int[] genomeCreate = {
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                20, 19, 18, 17, 15, 16, 21, 22, 23, 24, 25
         };
         return genomeCreate;
     }

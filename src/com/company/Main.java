@@ -8,7 +8,13 @@ public class Main {
         Stack genomeStack = new Stack();
         Genome gen = new Genome();
         Genome other = new Genome();
-        System.out.print(gen.equals(other));
+        Genome gen2 = other.invert(4,8);
+        Genome gen3 = gen2.invert(4,8);
+
+        System.out.print(gen.hashCode());
+        System.out.println(gen3.hashCode());
+        Iterative trial = new Iterative(gen);
+        trial.findSolution();
 
     }
 /**
