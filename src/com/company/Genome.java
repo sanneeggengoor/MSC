@@ -45,7 +45,7 @@ public class Genome {
     public boolean equals(Object other) {
         String gen1 = this.toString();
         String gen2 = other.toString();
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < gen1.length(); i++) {
             if (gen1.charAt(i) != gen2.charAt(i)) {
                 return false;
             }
