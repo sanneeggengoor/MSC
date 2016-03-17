@@ -18,10 +18,10 @@ public class Iterative {
         maxDepth = 1;
     }
 
-    public void createChildrenStack(){
+    public void createChildrenStack() {
         Genome parent = deepening.pop();
 
-        for(int i = 0; i<25; i++) {
+        for (int i = 0; i < 25; i++){
             for (int j = i; j < 25; j++) {
                 Genome child = parent.invert(i, j);
                 if (!listAll.contains(child)) {
