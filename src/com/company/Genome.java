@@ -43,7 +43,12 @@ public class Genome {
     }
 
     public boolean equals(Object other){
-        return other == this;
+        for(int i = 0; i < 25; i++) {
+            if(other[i] != this[i]) {
+                return false;
+            }
+        }
+        return true;
         // klopt nog niet!!!
     public boolean compare(Object other){
         String gen1 = other.toString();
