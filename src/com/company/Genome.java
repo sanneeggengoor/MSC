@@ -1,5 +1,8 @@
 package com.company;
 
+/**
+ * Created by Sanne on 18-2-2016.
+ */
 public class Genome {
     public int[] genome;
     int count;
@@ -40,8 +43,14 @@ public class Genome {
     }
 
     public boolean equals(Object other) {
-        return other == this;
-        // klopt nog niet!!!
+        String gen1 = this.toString();
+        String gen2 = other.toString();
+        for (int i = 0; i < 25; i++) {
+            if (gen1.charAt(i) != gen2.charAt(i)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public int hashCode() {
