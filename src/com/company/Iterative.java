@@ -10,17 +10,32 @@ public class Iterative {
     Stack<Genome> deepening;
     HashSet<String> listAll;
     int maxDepth;
+    Genome gen;
     static int MAX;
 
-    public Iterative() {
+    public Iterative(Genome gen) {
         deepening = new Stack<>();
         listAll = new HashSet<>();
         maxDepth = 1;
+        this.gen = gen;
     }
 
-    public void createChildrenStack() {
+
+    public void findSolution(){
+        while (true){
+            if (checkIfEmpty()){
+                maxDepth++;
+                deepening.push(gen);
+            } else if (checkIfEmpty()){
+                 break;
+            }
+            createChildrenStack();
+        }
+    }
+
+    private void createChildrenStack() {
         Genome parent = deepening.pop();
-        if (parent.count <= maxDepth) {
+        if (parent.count < maxDepth) {
             for (int i = 0; i < 25; i++) {
                 for (int j = i; j < 25; j++) {
                     Genome child = parent.invert(i, j);
