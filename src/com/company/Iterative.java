@@ -45,8 +45,5 @@ public class Iterative {
         return true;
     }
 
-    private boolean checkIfEmpty() {
-        return deepening.empty();
-    }
 }
 
