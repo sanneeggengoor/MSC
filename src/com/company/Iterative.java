@@ -18,8 +18,6 @@ public class Iterative {
         maxDepth = 1;
     }
 
-
-
     public void createChildrenStack() {
         Genome parent = deepening.pop();
         if (parent.count <= maxDepth) {
@@ -37,6 +35,14 @@ public class Iterative {
         }
     }
 
-
+    private boolean checkIfOk() {
+        Genome state = deepening.peek();
+        for (int i = 0; i < 25; i++) {
+            if (state[i] != i + 1) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
