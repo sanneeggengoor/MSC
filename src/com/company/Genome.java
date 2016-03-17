@@ -1,8 +1,6 @@
 package com.company;
 
-/**
- * Created by Sanne on 18-2-2016.
- */
+
 public class Genome {
     public int[] genome;
 
@@ -43,7 +41,7 @@ public class Genome {
     public boolean compare(Object other){
         String gen1 = other.toString();
         String gen2 = this.toString();
-        if (gen1.equals(gen2)) {
+        if(gen1.equals(gen2)) {
             return true;
         }
         return false;
