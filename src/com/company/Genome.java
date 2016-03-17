@@ -1,11 +1,21 @@
 package com.company;
 
+/**
+ * Created by Sanne on 18-2-2016.
+ */
 public class Genome {
     public int[] genome;
 
     public Genome() {
         genome = createGenome();
         int count = 0;
+    }
+
+    public Genome(Genome genome) {
+        this.genome = new int[25];
+        for(int i = 0; i < 25; i++) {
+            this.genome[i] = genome.genome[i];
+        }
     }
 
     private int[] createGenome(){
@@ -17,34 +27,37 @@ public class Genome {
         return genomeCreate;
     }
 
-    public void invert(int a, int b){
+    public Genome invert(int a, int b){
         int[] inverseGen= new int[25];
+        Genome child = new Genome(this);
         for(int i = a; i<=b; i++){
             int x = b - i + a;
-            inverseGen[i-1] = genome[x-1];
+            inverseGen[i-1] = child.genome[x-1];
         }
         for(int i = a; i <= b; i++){
-            genome[i-1]=inverseGen[i-1];
+            child.genome[i-1]=inverseGen[i-1];
         }
+        return child;
     }
 
-    public boolean equals(Object other){
-        for(int i = 0; i < 25; i++){
-            if(genome[i]){
-                return true;
-            }
+    public boolean compare(Object other){
+        String gen1 = other.toString();
+        String gen2 = this.toString();
+        if (gen1.equals(gen2)) {
+            return true;
         }
-
+        return false;
     }
 
     public int hashCode() {
         int counter = 0;
         for(int i = 0; i<25;i++){
-            counter = counter + genome[i]*(i+1);
+            counter += genome[i]*(i+1);
         }
         counter = counter % 5000;
         return counter;
     }
+
     public String toString() {
         String rep = "";
         for (int i = 0; i < genome.length; i++) {
