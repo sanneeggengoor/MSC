@@ -7,68 +7,59 @@ import java.util.Stack;
  * Created by Sanne on 17-3-2016.
  */
 public class Iterative {
-    Stack<Genome> deepening;
-    HashSet<Genome> listAll;
+    Stack<Genome> genomeStack;
+    HashSet<Genome> allStates;
     int maxDepth;
     Genome gen;
     static int MAX;
 
     public Iterative(Genome gen) {
-        deepening = new Stack<>();
-        listAll = new HashSet<>();
+        genomeStack = new Stack<>();
+        allStates = new HashSet<>();
         maxDepth = 1;
         this.gen = gen;
     }
 
-
     public void findSolution(){
-        deepening.push(gen);
-        int count = 0;
+        genomeStack.push(gen);
         while (true){
-            if (deepening.isEmpty() || deepening.peek().count==maxDepth){
+            if (genomeStack.isEmpty() || genomeStack.peek().count==maxDepth){
 
                 maxDepth++;
-                deepening.push(gen);
-                System.out.println("a"+listAll.size());
-                listAll.clear();
+                System.out.println("=========" + maxDepth);
+                genomeStack.push(gen);
+                allStates.clear();
 
-            } else if (checkIfOk()){
-                 break;
+            } else if (IsSolution(genomeStack.peek())){
+                System.out.println(genomeStack.peek());
+                break;
             }
 
             createChildrenStack();
-            count++;
-            //System.out.println(count);
-            //System.out.println(maxDepth);
-            //System.out.println(deepening.size());
         }
     }
 
     private void createChildrenStack() {
-        Genome parent = deepening.pop();
-        //System.out.println("count"+parent.count);
-        //System.out.println(parent);
-        //System.out.println(listAll.size());
-        if (parent.count < maxDepth) {
-            for (int i = 1; i < 25; i++) {
-                for (int j = i; j < 26; j++) {
-                    Genome child = parent.invert(i, j);
-                    child.count = parent.count + 1;
-                    //System.out.println("count child "+ child.count);
-                    if (!listAll.contains(child)) {
-                        //System.out.println(child.toString());
-                        if (child.count < maxDepth) {
-                            deepening.push(child);
-                        }
-                        listAll.add(child);
+        Genome parent = genomeStack.pop();
+        for (int i = 1; i < 25; i++) {
+            for (int j = i; j < 26; j++) {
+                Genome child = parent.invert(i, j);
+                child.count = parent.count + 1;
+                if (!allStates.contains(child)) {
+                    if (IsSolution(child)) {
+                        System.out.println("Solution found" + child);
+                        return;
                     }
+                    if (child.count < maxDepth) {
+                        genomeStack.push(child);
+                    }
+                    allStates.add(child);
                 }
             }
         }
     }
 
-    private boolean checkIfOk() {
-        Genome state = deepening.peek();
+    private boolean IsSolution(Genome state) {
         for (int i = 0; i < 25; i++) {
             if (state.genome[i] != i + 1) {
                 return false;

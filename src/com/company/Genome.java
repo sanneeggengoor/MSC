@@ -27,9 +27,10 @@ public class Genome {
                 5, 8, 18, 12, 13, 14, 15, 16, 17,
                 21, 3, 4, 9
         };*/
+
         int[] genomeCreate = {
-                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
-                20, 19, 18, 17, 15, 16, 21, 22, 23, 24, 25
+                1, 2, 4, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                20, 19, 18, 16, 17, 15, 21, 22, 23, 24, 25
         };
         return genomeCreate;
     }
@@ -48,14 +49,18 @@ public class Genome {
     }
 
     public boolean equals(Object other) {
-        String gen1 = this.toString();
-        String gen2 = other.toString();
-        for (int i = 0; i < gen1.length(); i++) {
-            if (gen1.charAt(i) != gen2.charAt(i)) {
-                return false;
+        if (other instanceof Genome) {
+            Genome othergenome = (Genome) other;
+            for (int i = 0; i < othergenome.genome.length; i++) {
+                if (othergenome.genome[i] != this.genome[i]) {
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
+        else {
+            return false;
+        }
     }
 
     public int hashCode() {
