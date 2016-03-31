@@ -12,6 +12,7 @@ public class Iterative {
     int maxDepth;
     Genome gen;
     static int MAX;
+    boolean solutionFound;
 
     public Iterative(Genome gen) {
         genomeStack = new Stack<>();
@@ -22,7 +23,8 @@ public class Iterative {
 
     public void findSolution(){
         genomeStack.push(gen);
-        while (true){
+        solutionFound = false;
+        while (!solutionFound){
             if (genomeStack.isEmpty() || genomeStack.peek().count==maxDepth){
 
                 maxDepth++;
@@ -30,9 +32,6 @@ public class Iterative {
                 genomeStack.push(gen);
                 allStates.clear();
 
-            } else if (IsSolution(genomeStack.peek())){
-                System.out.println(genomeStack.peek());
-                break;
             }
 
             createChildrenStack();
@@ -48,6 +47,7 @@ public class Iterative {
                 if (!allStates.contains(child)) {
                     if (IsSolution(child)) {
                         System.out.println("Solution found" + child);
+                        solutionFound = true;
                         return;
                     }
                     if (child.count < maxDepth) {
