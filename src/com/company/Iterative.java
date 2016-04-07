@@ -45,6 +45,9 @@ public class Iterative {
                 Genome child = parent.invert(i, j);
                 child.count = parent.count + 1;
                 addChild(child);
+                if(solutionFound) {
+                    return;
+                }
             }
         }
     }
