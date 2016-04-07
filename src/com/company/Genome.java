@@ -66,7 +66,7 @@ public class Genome {
     public int hashCode() {
         int counter = 0;
         for(int i = 0; i<25;i++){
-            counter += genome[i]*(10^i);
+            counter += genome[i]*(7^i);
         }
         counter = counter % 1299827;
         return counter;
