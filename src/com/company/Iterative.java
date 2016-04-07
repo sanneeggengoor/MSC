@@ -58,6 +58,7 @@ public class Iterative {
             allStates.add(child);
         }
     }
+
     private boolean checkSolution(Genome child) {
         if (IsSolution(child)) {
             System.out.println("Solution found" + child);
