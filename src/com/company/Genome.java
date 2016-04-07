@@ -68,7 +68,7 @@ public class Genome {
         for(int i = 0; i<25;i++){
             counter += genome[i]*(i+1);
         }
-        counter = counter % 5000;
+        counter = counter % 7919;
         return counter;
     }
 
