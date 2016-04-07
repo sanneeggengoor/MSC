@@ -44,17 +44,20 @@ public class Iterative {
             for (int j = i; j < 26; j++) {
                 Genome child = parent.invert(i, j);
                 child.count = parent.count + 1;
-                if (!allStates.contains(child)) {
-                    solutionFound = checkSolution(child);
-                    if (child.count < maxDepth) {
-                        genomeStack.push(child);
-                    }
-                    allStates.add(child);
-                }
+                addChild(child);
             }
         }
     }
 
+    private void addChild(Genome child) {
+        if (!allStates.contains(child)) {
+            solutionFound = checkSolution(child);
+            if (child.count < maxDepth) {
+                genomeStack.push(child);
+            }
+            allStates.add(child);
+        }
+    }
     private boolean checkSolution(Genome child) {
         if (IsSolution(child)) {
             System.out.println("Solution found" + child);
