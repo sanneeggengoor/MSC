@@ -45,11 +45,7 @@ public class Iterative {
                 Genome child = parent.invert(i, j);
                 child.count = parent.count + 1;
                 if (!allStates.contains(child)) {
-                    if (IsSolution(child)) {
-                        System.out.println("Solution found" + child);
-                        solutionFound = true;
-                        return;
-                    }
+                    solutionFound = checkSolution(child);
                     if (child.count < maxDepth) {
                         genomeStack.push(child);
                     }
@@ -57,6 +53,14 @@ public class Iterative {
                 }
             }
         }
+    }
+
+    private boolean checkSolution(Genome child) {
+        if (IsSolution(child)) {
+            System.out.println("Solution found" + child);
+            return true;
+        }
+        return false;
     }
 
     private boolean IsSolution(Genome state) {
