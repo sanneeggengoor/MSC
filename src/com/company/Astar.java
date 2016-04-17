@@ -1,45 +1,38 @@
 package com.company;
 
+import java.util.Comparator;
 import java.util.HashSet;
-import java.util.Stack;
+import java.util.PriorityQueue;
 
 /**
- * Created by Sanne on 17-3-2016.
+ * Created by Sanne on 17-4-2016.
  */
-public class Iterative {
-    Stack<Genome> genomeStack;
+public class Astar {
+    Comparator<Genome> comparator = new GenomeComparator();
+    private PriorityQueue<Genome> genomePrior;
     HashSet<Genome> allStates;
-    int maxDepth;
     Genome gen;
-    static int MAX;
     boolean solutionFound;
 
-    public Iterative(Genome gen) {
-        genomeStack = new Stack<>();
+    public Astar(Genome gen) {
+        genomePrior = new PriorityQueue<Genome>(comparator);
         allStates = new HashSet<>();
-        maxDepth = 1;
         this.gen = gen;
+        solutionFound = false;
     }
 
     public void findSolution(){
-        genomeStack.push(gen);
+        genomePrior.add(gen);
         solutionFound = false;
         while (!solutionFound){
-            if (genomeStack.isEmpty() || genomeStack.peek().count==maxDepth){
-
-                maxDepth++;
-                System.out.println("=========" + maxDepth);
-                genomeStack.push(gen);
-                allStates.clear();
-
-            }
-
-            createChildrenStack();
+            createChildrenPrior();
         }
+        Genome finalgen = genomePrior.poll();
+        finalgen.printPath();
     }
 
-    private void createChildrenStack() {
-        Genome parent = genomeStack.pop();
+    private void createChildrenPrior() {
+        Genome parent = genomePrior.poll();
         for (int i = 1; i < 25; i++) {
             for (int j = i; j < 26; j++) {
                 if(parent.forbiddenBefore(i) && parent.forbiddenAfter(j)) {
@@ -53,15 +46,16 @@ public class Iterative {
 
     private void addChild(Genome child) {
         if (!allStates.contains(child)) {
-            solutionFound = child.checkSolution();
-            if (child.count < maxDepth) {
-                genomeStack.push(child);
+            if(child.checkSolution()){
+                solutionFound = true;
             }
+
+            genomePrior.add(child);
             allStates.add(child);
         }
     }
 
 
 
-}
 
+}
