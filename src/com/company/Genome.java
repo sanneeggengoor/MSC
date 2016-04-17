@@ -35,8 +35,8 @@ public class Genome {
         };
         /*
         int[] genomeCreate = {
-                1, 2, 4, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
-                20, 19, 18, 16, 17, 15, 21, 22, 23, 24, 25
+                1, 2, 3, 4, 6, 5, 8, 7, 9, 10, 11, 12, 13, 14,
+                20, 19, 18, 17, 16, 15, 21, 22, 23, 24, 25
         };
         */
         return genomeCreate;
@@ -74,9 +74,9 @@ public class Genome {
     public int hashCode() {
         int counter = 0;
         for(int i = 0; i<25;i++){
-            counter += genome[i]*(7^i);
+            counter += genome[i]*(10^i);
         }
-        counter = counter % 1299827;
+        counter = counter % 30006863;
         return counter;
     }
 
