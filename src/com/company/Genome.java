@@ -93,19 +93,13 @@ public class Genome {
     public boolean forbiddenBefore(int invert){
         int[] row = this.genome;
         int gen = row[invert - 1];
-        if (invert > 1 && (row[invert-2] == gen + 1 | row[invert-2] == gen - 1)){
-            return false;
-        }
-        return true;
+        return !(invert > 1 && (row[invert-2] == gen + 1 | row[invert-2] == gen - 1))
     }
 
     public boolean forbiddenAfter(int invert){
         int[] row = this.genome;
         int gen = row[invert - 1];
-        if (invert < 24 && (row[invert] == gen + 1 | row[invert] == gen - 1)){
-            return false;
-        }
-        return true;
+        return !(invert < 24 && (row[invert] == gen + 1 | row[invert] == gen - 1))
     }
 
 
@@ -117,7 +111,7 @@ public class Genome {
                 schatting++;
             }
         }
-        int score = schatting + this.count;  // moet eigenlijk zijn schatting/2 + count, maar lukt niet dan
+        int score = schatting/2 + this.count;  // moet eigenlijk zijn schatting/2 + count, maar lukt niet dan
         return score;
     }
 
