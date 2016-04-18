@@ -6,6 +6,7 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
+
         Stack genomeStack = new Stack();
         Genome gen = new Genome();
         Astar trial = new Astar(gen);

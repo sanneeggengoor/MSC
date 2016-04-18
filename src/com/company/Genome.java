@@ -34,12 +34,13 @@ public class Genome {
                 5, 8, 18, 12, 13, 14, 15, 16, 17,
                 21, 3, 4, 9
         };
+
         /*
         int[] genomeCreate = {
-                1, 2, 3, 4, 6, 5, 8, 7, 9, 10, 11, 12, 13, 14,
+                3, 2, 1, 4, 6, 5, 8, 7, 9, 10, 11, 12, 13, 14,
                 20, 19, 18, 17, 16, 15, 21, 22, 23, 24, 25
-        };
-        */
+        }; */
+
         return genomeCreate;
     }
 
@@ -116,7 +117,7 @@ public class Genome {
                 schatting++;
             }
         }
-        int score = schatting + (this.count)/2;  // moet eigenlijk zijn schatting/2 + count, maar lukt niet dan
+        int score = schatting + this.count;  // moet eigenlijk zijn schatting/2 + count, maar lukt niet dan
         return score;
     }
 
