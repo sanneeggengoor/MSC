@@ -23,6 +23,7 @@ public class Genome {
         for(int i = 0; i < 25; i++) {
             this.genome[i] = genome.genome[i];
         }
+        this.previous = genome;
         this.score = aStarscore();
     }
 
@@ -52,7 +53,7 @@ public class Genome {
         for(int i = a; i <= b; i++){
             child.genome[i-1]=inverseGen[i-1];
         }
-        child.previous = this;
+        //child.previous = this;
         return child;
     }
 
@@ -106,6 +107,8 @@ public class Genome {
         return true;
     }
 
+
+    // SCORE KLOPT NIET HELEMAAL NOG
     public int aStarscore(){
         int schatting = 0;
         for (int i = 1; i < 25; i++ ){
@@ -113,16 +116,17 @@ public class Genome {
                 schatting++;
             }
         }
-        int score = schatting + (this.count)/2;
+        int score = schatting + (this.count)/2;  // moet eigenlijk zijn schatting/2 + count, maar lukt niet dan
         return score;
     }
+
 
     public void printPath(){
         if (previous != null) {
 
             previous.printPath();
 
-            System.out.println("step: " + Integer.toString(this.count));
+            System.out.println("step: " + Integer.toString(this.count) + "score: "+ Integer.toString(this.score));
             System.out.println(this);
 
         }

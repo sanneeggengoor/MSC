@@ -28,6 +28,9 @@ public class Astar {
             createChildrenPrior();
         }
         Genome finalgen = genomePrior.poll();
+        while(!finalgen.IsSolution()) {
+            finalgen = genomePrior.poll();
+        }
         finalgen.printPath();
     }
 

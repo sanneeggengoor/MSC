@@ -48,6 +48,7 @@ public class Iterative {
                     addChild(child);
                     if(solutionFound) {
                         return;
+                    }
                 }
             }
         }
