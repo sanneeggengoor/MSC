@@ -93,13 +93,13 @@ public class Genome {
     public boolean forbiddenBefore(int invert){
         int[] row = this.genome;
         int gen = row[invert - 1];
-        return !(invert > 1 && (row[invert-2] == gen + 1 | row[invert-2] == gen - 1))
+        return !(invert > 1 && (row[invert-2] == gen + 1 | row[invert-2] == gen - 1));
     }
 
     public boolean forbiddenAfter(int invert){
         int[] row = this.genome;
         int gen = row[invert - 1];
-        return !(invert < 24 && (row[invert] == gen + 1 | row[invert] == gen - 1))
+        return !(invert < 24 && (row[invert] == gen + 1 | row[invert] == gen - 1));
     }
 
 
