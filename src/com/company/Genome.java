@@ -8,7 +8,7 @@ import java.util.Comparator;
 public class Genome {
     public int[] genome;
     int count;
-    int score;
+    double score;
     Genome previous;
 
     public Genome() {
@@ -103,14 +103,14 @@ public class Genome {
     }
 
 
-    public int aStarscore(){
-        int schatting = 0;
+    public double aStarscore(){
+        double schatting = 0;
         for (int i = 1; i < 25; i++ ){
             if(forbiddenAfter(i)){
                 schatting++;
             }
         }
-        int score = schatting/2 + this.count;
+        double score = schatting/1.5 + this.count;
         return score;
     }
 
@@ -120,7 +120,7 @@ public class Genome {
 
             previous.printPath();
 
-            System.out.println("step: " + Integer.toString(this.count) + "score: "+ Integer.toString(this.score));
+            System.out.println("step: " + Integer.toString(this.count) + "score: "+ Double.toString(this.score));
             System.out.println(this);
 
         }

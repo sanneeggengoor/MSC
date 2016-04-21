@@ -8,6 +8,6 @@ import java.util.Comparator;
 public class GenomeComparator implements Comparator<Genome> {
 
     public int compare(Genome a, Genome b){
-        return a.score - b.score;
+        return (int)(a.score - b.score);
     }
 }
