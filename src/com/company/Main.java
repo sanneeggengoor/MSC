@@ -9,7 +9,7 @@ public class Main {
 
         Stack genomeStack = new Stack();
         Genome gen = new Genome();
-        Astar trial = new Astar(gen);
+        AstarDeep trial = new AstarDeep(gen);
         //Iterative trial = new Iterative(gen);
         trial.findSolution();
 

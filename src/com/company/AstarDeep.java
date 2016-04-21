@@ -29,7 +29,7 @@ public class AstarDeep {
         genomePrior.add(gen);
         solutionFound = false;
         while(!solutionFound) {
-            while (!solutionFound && countParents < 40000) {
+            while (!solutionFound && countParents < 10000) {
                 createChildrenPrior();
                 countParents++;
                 if (countParents % 200 == 0) {
@@ -39,6 +39,7 @@ public class AstarDeep {
             genomePrior.clear();
             genomePrior.add(gen);
             maxDeep++;
+            countParents = 0;
         }
 
         Genome finalgen = genomePrior.poll();
