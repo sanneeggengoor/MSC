@@ -110,7 +110,7 @@ public class Genome {
                 schatting++;
             }
         }
-        double score = schatting/1.5 + this.count;
+        double score = schatting/2 + this.count;
         return score;
     }
 
