@@ -22,10 +22,15 @@ public class Astar {
     }
 
     public void findSolution(){
+        int countParents = 0;
         genomePrior.add(gen);
         solutionFound = false;
         while (!solutionFound){
             createChildrenPrior();
+            countParents++;
+            if(countParents % 200 == 0){
+                System.out.println(countParents);
+            }
         }
         Genome finalgen = genomePrior.poll();
         while(!finalgen.IsSolution()) {
