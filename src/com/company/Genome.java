@@ -103,7 +103,6 @@ public class Genome {
     }
 
 
-    // SCORE KLOPT NIET HELEMAAL NOG
     public int aStarscore(){
         int schatting = 0;
         for (int i = 1; i < 25; i++ ){
@@ -111,7 +110,7 @@ public class Genome {
                 schatting++;
             }
         }
-        int score = schatting/2 + this.count;  // moet eigenlijk zijn schatting/2 + count, maar lukt niet dan
+        int score = schatting + this.count;
         return score;
     }
 

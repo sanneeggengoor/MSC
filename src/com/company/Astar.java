@@ -36,7 +36,6 @@ public class Astar {
 
     private void createChildrenPrior() {
         Genome parent = genomePrior.poll();
-        System.out.println(parent.count);
         for (int i = 1; i < 25; i++) {
             for (int j = i; j < 26; j++) {
                 if(parent.forbiddenBefore(i) && parent.forbiddenAfter(j)) {
