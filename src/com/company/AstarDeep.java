@@ -26,10 +26,11 @@ public class AstarDeep {
     public void findSolution(){
         int countParents = 0;
         maxDeep = (int)gen.aStarscore();
-        genomePrior.add(gen);
+
         solutionFound = false;
         while(!solutionFound) {
-            while (!solutionFound && countParents < 10000) {
+            genomePrior.add(gen);
+            while (!solutionFound && countParents < 1000) {
                 createChildrenPrior();
                 countParents++;
                 if (countParents % 200 == 0) {
@@ -37,7 +38,7 @@ public class AstarDeep {
                 }
             }
             genomePrior.clear();
-            genomePrior.add(gen);
+            //genomePrior.add(gen);
             maxDeep++;
             countParents = 0;
         }
@@ -56,6 +57,7 @@ public class AstarDeep {
                 if(parent.forbiddenBefore(i) && parent.forbiddenAfter(j) && parent.count <= maxDeep) {
                     Genome child = parent.invert(i, j);
                     child.count = parent.count + 1;
+                    child.movedGenes = parent.movedGenes + Math.abs(i - j);
                     addChild(child);
                 }
             }

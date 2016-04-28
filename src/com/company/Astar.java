@@ -46,6 +46,7 @@ public class Astar {
                 if(parent.forbiddenBefore(i) && parent.forbiddenAfter(j)) {
                     Genome child = parent.invert(i, j);
                     child.count = parent.count + 1;
+                    child.movedGenes = parent.movedGenes + Math.abs(i - j);
                     addChild(child);
                 }
             }
