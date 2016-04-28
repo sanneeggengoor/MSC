@@ -47,6 +47,8 @@ public class Astar {
                     Genome child = parent.invert(i, j);
                     child.count = parent.count + 1;
                     child.movedGenes = parent.movedGenes + Math.abs(i - j);
+                    System.out.println("AScore" + child.aStarscore());
+                    System.out.println("Score" + child.score);
                     addChild(child);
                 }
             }
