@@ -8,12 +8,14 @@ import java.util.Comparator;
 public class Genome {
     public int[] genome;
     int count;
+    int movedGenes;
     double score;
     Genome previous;
 
     public Genome() {
         genome = createGenome();
         count = 0;
+        movedGenes = 0;
         score = 24;
     }
 
@@ -110,7 +112,7 @@ public class Genome {
                 schatting++;
             }
         }
-        double score = schatting/2 + this.count;
+        double score = schatting/2 + this.movedGenes;
         return score;
     }
 
