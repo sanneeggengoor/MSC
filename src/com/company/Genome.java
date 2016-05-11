@@ -1,6 +1,7 @@
 package com.company;
 
-import java.util.Comparator;
+import java.util.Random;
+
 
 /**
  * Created by Sanne on 18-2-2016.
@@ -12,8 +13,11 @@ public class Genome {
     double score;
     Genome previous;
 
+    private Random rgen = new Random();
+
+
     public Genome() {
-        genome = createGenome();
+        genome = createRandomGenome();
         count = 0;
         movedGenes = 0;
         score = 24;
@@ -40,6 +44,28 @@ public class Genome {
                 5, 8, 18, 12, 13, 14, 15, 16, 17,
                 21, 3, 4, 9
         };
+    }
+
+    private int[] createRandomGenome(){
+        int[] rGenome = new int[25];
+        for(int i = 1; i<26; i++){
+            int random = rgen.nextInt(25);
+            while (rGenome[random] != 0) {
+                random++;
+                random = random % 25;
+            }
+            rGenome[random] = i;
+
+        }
+        return rGenome;
+    }
+
+    public Genome[] makeTestSet() {
+        Genome[] testSet = new Genome[100];
+        for (int i = 0; i<100; i++){
+            testSet[i] = new Genome();
+        }
+        return testSet;
     }
 
     public Genome invert(int a, int b){

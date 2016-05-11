@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Genome gen = new Genome();
         Genome[] testSet = gen.makeTestSet();
-        
+
         /**
         Stack genomeStack = new Stack();
         Genome gen = new Genome();
