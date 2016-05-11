@@ -9,26 +9,32 @@ public class RandomSolution {
 
     private Random rnd = new Random();
     Genome gen;
+    Genome newgen;
     boolean solutionFound;
+    int number_swaps;
+    int[] randomScores;
 
     public RandomSolution(Genome gen) {
         this.gen = gen;
-        solutionFound = false;
+        randomScores = new int[100];
     }
 
-    public void findSolution() {
-        while(!solutionFound) {
-            randomInvert();
-            if
+    public int[] findSolutions() {
+        for(int i = 0; i<100; i++) {
+            newgen = gen;
+            while (!newgen.IsSolution()) {
+                newgen = randomInvert();
+                number_swaps++;
+            }
+            randomScores[i] = number_swaps;
         }
+        return randomScores;
     }
 
-    private void randomInvert() {
+    private Genome randomInvert() {
         int start_invert = rnd.nextInt(25);
         int end_invert = rnd.nextInt(25 - start_invert) + start_invert + 1;
-        gen = gen.invert(start_invert,end_invert);
-
-
+        return newgen.invert(start_invert, end_invert);
     }
 
 }
