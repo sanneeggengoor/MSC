@@ -45,10 +45,8 @@ public class Astar {
             for (int j = i; j < 26; j++) {
                 if(parent.forbiddenBefore(i) && parent.forbiddenAfter(j)) {
                     Genome child = parent.invert(i, j);
-                    child.count = parent.count + 1;
-                    child.movedGenes = parent.movedGenes + Math.abs(i - j);
-                    System.out.println("AScore" + child.aStarscore());
-                    System.out.println("Score" + child.score);
+                    //System.out.println("AScore" + child.aStarscore());
+                    //System.out.println("Score" + child.score);
                     addChild(child);
                 }
             }
