@@ -7,7 +7,9 @@ public class Main {
 
     public static void main(String[] args) {
         Genome gen = new Genome();
-        Genome[] testSet = gen.makeTestSet();
+        RandomSolution trial = new RandomSolution(gen);
+        System.out.println(trial.findSolutions());
+        //Genome[] testSet = gen.makeTestSet();
 
         /**
         Stack genomeStack = new Stack();
