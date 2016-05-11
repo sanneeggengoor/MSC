@@ -15,13 +15,14 @@ public class RandomSolution {
         this.gen = gen;
         solutionFound = false;
     }
-
+/**
     public void findSolution() {
         while(!solutionFound) {
             randomInvert();
             if
         }
     }
+ */
 
     private void randomInvert() {
         int start_invert = rnd.nextInt(25);

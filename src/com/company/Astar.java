@@ -29,14 +29,15 @@ public class Astar {
             createChildrenPrior();
             countParents++;
             if(countParents % 200 == 0){
-                System.out.println(countParents);
+                //System.out.println(countParents);
             }
         }
         Genome finalgen = genomePrior.poll();
         while(!finalgen.IsSolution()) {
             finalgen = genomePrior.poll();
         }
-        finalgen.printPath();
+        genomePrior.add(finalgen);
+        //finalgen.printPath();
     }
 
     private void createChildrenPrior() {
@@ -51,6 +52,11 @@ public class Astar {
                 }
             }
         }
+    }
+
+    public Genome getFinalGen(){
+        Genome finalGen = genomePrior.peek();
+        return finalGen;
     }
 
     private void addChild(Genome child) {

@@ -135,7 +135,9 @@ public class Genome {
                 schatting++;
             }
         }
-        return schatting + this.movedGenes;
+        schatting = schatting/1;
+        return schatting + this.count;
+       //return schatting + this.movedGenes;
     }
 
 
@@ -152,7 +154,7 @@ public class Genome {
 
     public boolean checkSolution() {
         if (IsSolution()) {
-            System.out.println("Solution found" + this);
+            //System.out.println("Solution found" + this);
 
             return true;
         }
