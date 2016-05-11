@@ -10,6 +10,9 @@ public class Main {
         Genome[] testSet = gen.makeTestSet();
         TestAndScore trial =  new TestAndScore();
         trial.printTest();
+        RandomSolution trial = new RandomSolution(gen);
+        System.out.println(trial.findSolutions());
+        //Genome[] testSet = gen.makeTestSet();
 
         /**
         Stack genomeStack = new Stack();
