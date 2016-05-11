@@ -14,7 +14,7 @@ public class Stacks {
         for(int i = 0; i<25; i++){
             for(int j = i ; j < 25; j++){
                 Genome child = parent.invert(i,j);
-                child.count = parent.count + 1;
+                child.countSwaps = parent.countSwaps + 1;
                 genomeStack.push(child);
             }
 

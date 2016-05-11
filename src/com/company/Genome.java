@@ -8,9 +8,11 @@ import java.util.Random;
  */
 public class Genome {
     public int[] genome;
-    int count;
+    int countSwaps;
+    int countDistance;
     int movedGenes;
-    double score;
+    double scoreSwap;
+    double scoreDistance;
     Genome previous;
 
     private Random rgen = new Random();
@@ -18,17 +20,21 @@ public class Genome {
 
     public Genome() {
         genome = createRandomGenome();
-        count = 0;
+        countSwaps = 0;
+        countDistance = 0;
         movedGenes = 0;
-        score = 24;
+        scoreSwap = 24;
+        scoreDistance = 0;
     }
 
     public Genome(Genome genome) {
-        this.count = genome.count;
+        this.countSwaps = genome.countSwaps;
+        this.countDistance = genome.countDistance;
         this.genome = new int[25];
         System.arraycopy(genome.genome, 0, this.genome, 0, 25);
         this.previous = genome;
-        this.score = genome.score;
+        this.scoreSwap = genome.scoreSwap;
+        this.scoreDistance = genome.scoreDistance;
     }
 
     private int[] createGenome(){
@@ -60,9 +66,9 @@ public class Genome {
         return rGenome;
     }
 
-    public Genome[] makeTestSet() {
-        Genome[] testSet = new Genome[100];
-        for (int i = 0; i<100; i++){
+    public Genome[] makeTestSet(int number) {
+        Genome[] testSet = new Genome[number];
+        for (int i = 0; i<number; i++){
             testSet[i] = new Genome();
         }
         return testSet;
@@ -77,10 +83,23 @@ public class Genome {
         }
         System.arraycopy(inverseGen, a - 1, child.genome, a - 1, b + 1 - a);
         //child.previous = this;
-        child.count = this.count + 1;
+        int distance = calculateDistance(a,b);
+        child.countSwaps = this.countSwaps + 1;
+        child.countDistance = this.countDistance + distance;
         child.movedGenes = this.movedGenes + Math.abs(a - b);
-        child.score = child.aStarscore();
+        child.scoreSwap = child.aStarscoreSwaps();
+        child.scoreDistance = child.aStarscoreDistance();
+
         return child;
+    }
+
+    private int calculateDistance(int low,int high){
+        int distance = high - low;
+        int finaldistance = 0;
+        for(int i = 0; i < distance/2; i++){
+            finaldistance = finaldistance + 1 + i;
+        }
+        return finaldistance;
     }
 
     public boolean equals(Object other) {
@@ -128,7 +147,7 @@ public class Genome {
     }
 
 
-    public double aStarscore(){
+    public double aStarscoreSwaps(){
         double schatting = 0;
         for (int i = 1; i < 25; i++ ){
             if(forbiddenAfter(i)){
@@ -136,8 +155,21 @@ public class Genome {
             }
         }
         schatting = schatting/1;
-        return schatting + this.count;
+        return schatting + this.countSwaps;
        //return schatting + this.movedGenes;
+    }
+
+    public double aStarscoreDistance(){
+        double schatting = 0;
+        int[] gen = this.genome;
+        for(int i = 0; i<25; i++){
+            int verschil = gen[i] - i + 1;
+            if (verschil < 0) {
+                verschil = verschil *-1;
+            }
+            schatting = schatting+verschil;
+        }
+        return schatting*20;
     }
 
 
@@ -146,7 +178,8 @@ public class Genome {
 
             previous.printPath();
 
-            System.out.println("step: " + Integer.toString(this.count) + "score: "+ Double.toString(this.score));
+            System.out.println("step: " + Integer.toString(this.countSwaps) + "score in swaps: "+
+                    Double.toString(this.scoreSwap) + "score in distance: " +Double.toString(this.scoreDistance));
             System.out.println(this);
 
         }

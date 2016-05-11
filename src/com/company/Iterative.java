@@ -25,7 +25,7 @@ public class Iterative {
         genomeStack.push(gen);
         solutionFound = false;
         while (!solutionFound){
-            if (genomeStack.isEmpty() || genomeStack.peek().count==maxDepth){
+            if (genomeStack.isEmpty() || genomeStack.peek().countSwaps==maxDepth){
 
                 maxDepth++;
                 System.out.println("=========" + maxDepth);
@@ -44,7 +44,7 @@ public class Iterative {
             for (int j = i; j < 26; j++) {
                 if(parent.forbiddenBefore(i) && parent.forbiddenAfter(j)) {
                     Genome child = parent.invert(i, j);
-                    child.count = parent.count + 1;
+                    child.countSwaps = parent.countSwaps + 1;
                     addChild(child);
                     if(solutionFound) {
                         return;
@@ -57,7 +57,7 @@ public class Iterative {
     private void addChild(Genome child) {
         if (!allStates.contains(child)) {
             solutionFound = child.checkSolution();
-            if (child.count < maxDepth) {
+            if (child.countSwaps < maxDepth) {
                 genomeStack.push(child);
             }
             allStates.add(child);

@@ -25,7 +25,7 @@ public class AstarDeep {
 
     public void findSolution(){
         int countParents = 0;
-        maxDeep = (int)gen.aStarscore();
+        maxDeep = (int)gen.aStarscoreSwaps();
 
         solutionFound = false;
         while(!solutionFound) {
@@ -54,9 +54,9 @@ public class AstarDeep {
         Genome parent = genomePrior.poll();
         for (int i = 1; i < 25; i++) {
             for (int j = i; j < 26; j++) {
-                if(parent.forbiddenBefore(i) && parent.forbiddenAfter(j) && parent.count <= maxDeep) {
+                if(parent.forbiddenBefore(i) && parent.forbiddenAfter(j) && parent.countSwaps <= maxDeep) {
                     Genome child = parent.invert(i, j);
-                    child.count = parent.count + 1;
+                    child.countSwaps = parent.countSwaps + 1;
                     child.movedGenes = parent.movedGenes + Math.abs(i - j);
                     addChild(child);
                 }
