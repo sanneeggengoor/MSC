@@ -6,13 +6,17 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-
+        Genome gen = new Genome();
+        Genome[] testSet = gen.makeTestSet();
+        
+        /**
         Stack genomeStack = new Stack();
         Genome gen = new Genome();
         AstarDeep trial = new AstarDeep(gen);
         //Astar trial = new Astar(gen);
         //Iterative trial = new Iterative(gen);
         trial.findSolution();
+         */
 
     }
 /**
