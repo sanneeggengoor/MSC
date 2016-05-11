@@ -22,20 +22,12 @@ public class Genome {
     public Genome(Genome genome) {
         this.count = genome.count;
         this.genome = new int[25];
-        for(int i = 0; i < 25; i++) {
-            this.genome[i] = genome.genome[i];
-        }
+        System.arraycopy(genome.genome, 0, this.genome, 0, 25);
         this.previous = genome;
-        this.score = aStarscore();
+        this.score = genome.score;
     }
 
     private int[] createGenome(){
-
-        int[] genomeCreate = {
-                23, 1, 2, 11, 24, 22, 19, 6, 10, 7, 25, 20,
-                5, 8, 18, 12, 13, 14, 15, 16, 17,
-                21, 3, 4, 9
-        };
 
         /*
         int[] genomeCreate = {
@@ -43,7 +35,11 @@ public class Genome {
                 20, 19, 18, 17, 16, 15, 21, 22, 23, 24, 25
         }; */
 
-        return genomeCreate;
+        return new int[]{
+                23, 1, 2, 11, 24, 22, 19, 6, 10, 7, 25, 20,
+                5, 8, 18, 12, 13, 14, 15, 16, 17,
+                21, 3, 4, 9
+        };
     }
 
     public Genome invert(int a, int b){
@@ -53,10 +49,11 @@ public class Genome {
             int x = b - i + a;
             inverseGen[i-1] = child.genome[x-1];
         }
-        for(int i = a; i <= b; i++){
-            child.genome[i-1]=inverseGen[i-1];
-        }
+        System.arraycopy(inverseGen, a - 1, child.genome, a - 1, b + 1 - a);
         //child.previous = this;
+        child.count = this.count + 1;
+        child.movedGenes = this.movedGenes + Math.abs(a - b);
+        child.score = child.aStarscore();
         return child;
     }
 
@@ -86,8 +83,8 @@ public class Genome {
 
     public String toString() {
         String rep = "";
-        for (int i = 0; i < genome.length; i++) {
-            rep += genome[i] + ", ";
+        for (int aGenome : genome) {
+            rep += aGenome + ", ";
         }
         return rep;
     }
@@ -112,8 +109,7 @@ public class Genome {
                 schatting++;
             }
         }
-        double score = schatting/2 + this.movedGenes;
-        return score;
+        return schatting + this.movedGenes;
     }
 
 
