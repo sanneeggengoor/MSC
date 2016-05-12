@@ -14,10 +14,12 @@ public class Main {
 
     public static void main(String[] args) {
         Genome gen = new Genome();
+        Iterative trial = new Iterative(gen);
+        trial.findSolution();
 
         //Genome[] testSet = gen.makeTestSet(100);
-        TestAndScore trial =  new TestAndScore();
-        trial.printTest();
+        //TestAndScore trial =  new TestAndScore();
+        //trial.printTest();
         //RandomSolution trial = new RandomSolution(gen);
         //System.out.println(trial.findSolutions());
 
@@ -27,7 +29,6 @@ public class Main {
         Stack genomeStack = new Stack();
         Genome gen = new Genome();
         //Astar trial = new Astar(gen);
-        //Iterative trial = new Iterative(gen);
         trial.findSolution();
          */
 
