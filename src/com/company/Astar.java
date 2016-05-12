@@ -24,6 +24,8 @@ public class Astar {
     public void findSolution(){
         int countParents = 0;
         genomePrior.add(gen);
+        // dit is die 0 die hij telkens uitprint, dan weet je hoeveel heuristische hij al heeft opgelost.
+        System.out.println(gen.countDistance);
         solutionFound = false;
         while (!solutionFound){
             createChildrenPrior();
@@ -42,6 +44,7 @@ public class Astar {
 
     private void createChildrenPrior() {
         Genome parent = genomePrior.poll();
+        //System.out.println(parent.countDistance);
         for (int i = 1; i < 25; i++) {
             for (int j = i; j < 26; j++) {
                 if(parent.forbiddenBefore(i) && parent.forbiddenAfter(j)) {

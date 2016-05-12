@@ -13,7 +13,8 @@ public class RandomSolution {
     boolean solutionFound;
     int number_swaps;
     int[] randomScores;
-    private int TESTSIZE = 100;
+    // Dit is een constante voor hoeveel random genomen we willen maken, staat nu op 10, want dat duurt niet lang
+    private int TESTSIZE = 10;
 
 
     public RandomSolution(Genome gen) {

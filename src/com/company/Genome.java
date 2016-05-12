@@ -68,6 +68,9 @@ public class Genome {
 
     public Genome[] makeTestSet(int number) {
         Genome[] testSet = new Genome[number];
+        // Ik doe wel setSeed() maar toch komen er elke keer andere genomen uit? Hoe kan dat??, als dit wel lukt
+        // hebben we namelijk gepaarde data, en dan kunnen we geloof ik makkelijker een test doen.
+        rgen.setSeed(2);
         for (int i = 0; i<number; i++){
             testSet[i] = new Genome();
         }
@@ -93,12 +96,25 @@ public class Genome {
         return child;
     }
 
+    // This function calculates the distance that is added to the total distance when inverting
+    // from low to high (Kan mooier nog hoor, maar hij werkt iig)
     private int calculateDistance(int low,int high){
         int distance = high - low;
-        int finaldistance = 0;
-        for(int i = 0; i < distance/2; i++){
-            finaldistance = finaldistance + 1 + i;
+        int dis = high - low;
+        int finaldistance = distance;
+        while(distance >1){
+            distance = distance - 2;
+            finaldistance = finaldistance + distance;
         }
+        if(distance ==1){
+           finaldistance++;
+        }
+        while(distance < dis){
+            distance = distance + 2;
+            finaldistance = finaldistance + distance;
+            //System.out.println("Loop? "+ high + low);
+        }
+        //System.out.println("Geen loop in dit");
         return finaldistance;
     }
 
@@ -159,17 +175,22 @@ public class Genome {
        //return schatting + this.movedGenes;
     }
 
+    /**
+     * Deze functie geeft in ieder geval een schatting terug die werkt. Hij berekent eerst het aantal swaps dat
+     * minimaal nog gedaan moet worden (schatting/2) en doet dat keer de afstand van een gemiddelde swap (lengte 12,5)
+     * dus ik doe maar van 1 tot 14 (=lengte 13). En dan voegt hij de afstand die nu al is afgelegd er aantoe.
+     *
+     */
     public double aStarscoreDistance(){
         double schatting = 0;
         int[] gen = this.genome;
-        for(int i = 0; i<25; i++){
-            int verschil = gen[i] - i + 1;
-            if (verschil < 0) {
-                verschil = verschil *-1;
+        for (int i = 1; i < 25; i++ ){
+            if(forbiddenAfter(i)){
+                schatting++;
             }
-            schatting = schatting+verschil;
         }
-        return schatting*20;
+        int distance = calculateDistance(1,14);
+        return distance*schatting/2 + this.countDistance;
     }
 
 
