@@ -38,7 +38,6 @@ public class Iterative {
                     allStates.clear();
                 }
                 if(maxDepth == 3) {
-                    System.out.println("=========" + maxDepth);
                     long endTime   = System.currentTimeMillis();
                     long runTime = endTime - startTime;
                     if(runTime < minTime) {
