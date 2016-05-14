@@ -20,23 +20,25 @@ public class Iterative {
         allStates = new HashSet<>();
         maxDepth = 1;
         this.gen = gen;
-        minTime = 1000;
+        minTime = 10000;
     }
 
     public void findSolution(){
-        while(true){
+        //while(true){
             maxDepth = 1;
             long startTime = System.currentTimeMillis();
             genomeStack.push(gen);
             solutionFound = false;
             while (!solutionFound){
-                if (genomeStack.isEmpty() || genomeStack.peek().countSwaps==maxDepth){
+                if (genomeStack.isEmpty() || genomeStack.peek().countSwaps==maxDepth) {
 
                     maxDepth++;
-                    //System.out.println("=========" + maxDepth);
+                    System.out.println(maxDepth);                    long endTime   = System.currentTimeMillis();
+                    System.out.println(endTime - startTime);
                     genomeStack.push(gen);
                     allStates.clear();
                 }
+                /*
                 if(maxDepth == 3) {
                     long endTime   = System.currentTimeMillis();
                     long runTime = endTime - startTime;
@@ -46,9 +48,10 @@ public class Iterative {
                     }
                     break;
                 }
+                */
                 createChildrenStack();
             }
-        }
+        //}
     }
 
     private void createChildrenStack() {
@@ -59,7 +62,7 @@ public class Iterative {
                     Genome child = parent.invert(i, j);
                     child.countSwaps = parent.countSwaps + 1;
                     addChild(child);
-                    if(solutionFound) {
+                    if (solutionFound) {
                         return;
                     }
                 }
