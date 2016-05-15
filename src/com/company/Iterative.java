@@ -19,6 +19,7 @@ public class Iterative {
         allStates = new HashSet<>();
         maxDepth = 1;
         this.gen = gen;
+
     }
 
     public void findSolution(){

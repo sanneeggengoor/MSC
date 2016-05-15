@@ -12,13 +12,18 @@ public class Astar {
     private PriorityQueue<Genome> genomePrior;
     HashSet<Genome> allStates;
     Genome gen;
+    int timesResized;
+    int numOfQueue;
     boolean solutionFound;
 
     public Astar(Genome gen) {
         genomePrior = new PriorityQueue<Genome>(comparator);
+        // Even bij zetten dat we deze een set hebben gemaakt voor geheugenbesparing
         allStates = new HashSet<>();
         this.gen = gen;
         solutionFound = false;
+        numOfQueue = 0;
+        timesResized = 0;
     }
 
     public void findSolution(){
@@ -43,7 +48,15 @@ public class Astar {
     }
 
     private void createChildrenPrior() {
+        numOfQueue--;
         Genome parent = genomePrior.poll();
+        if(genomePrior.size()>4000000){
+            timesResized++;
+            resize();
+        }
+        if(genomePrior.size() %1000 == 0){
+            System.out.println(timesResized+ "  " +genomePrior.size());
+        }
         //System.out.println(parent.countDistance);
         for (int i = 1; i < 25; i++) {
             for (int j = i; j < 26; j++) {
@@ -57,6 +70,22 @@ public class Astar {
         }
     }
 
+    private void resize(){
+        Genome[] newPQ = new Genome[1000000];
+        for(int i = 0; i < 1000000; i++){
+            Genome gen = genomePrior.poll();
+            newPQ[i] = gen;
+        }
+        genomePrior.clear();
+        int j = 1000000;
+        while (j>0){
+            j--;
+            genomePrior.add(newPQ[j]);
+            newPQ[j]=null;
+        }
+
+    }
+
     public Genome getFinalGen(){
         Genome finalGen = genomePrior.peek();
         return finalGen;
@@ -67,7 +96,7 @@ public class Astar {
             if(child.checkSolution()){
                 solutionFound = true;
             }
-
+            numOfQueue ++;
             genomePrior.add(child);
             allStates.add(child);
         }

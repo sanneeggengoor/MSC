@@ -86,7 +86,7 @@ public class Genome {
         }
         System.arraycopy(inverseGen, a - 1, child.genome, a - 1, b + 1 - a);
         //child.previous = this;
-        int distance = calculateDistance(a,b);
+        int distance = b-a;
         child.countSwaps = this.countSwaps + 1;
         child.countDistance = this.countDistance + distance;
         child.movedGenes = this.movedGenes + Math.abs(a - b);
@@ -189,7 +189,7 @@ public class Genome {
                 schatting++;
             }
         }
-        int distance = calculateDistance(1,14);
+        int distance = 13;
         return distance*schatting/2 + this.countDistance;
     }
 

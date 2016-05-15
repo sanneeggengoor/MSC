@@ -40,8 +40,12 @@ public class TestAndScore {
 
         }
         // tabel printen
-        for(int j = 0; j < NUMBER; j++){
-            System.out.println(results[j][0] +"  " + results[j][1] +"  "+ results[j][2]);
+        for(int j = 0; j < 3; j++){
+            System.out.println("Nummer: " + j);
+            for(int k = 0; k<NUMBER; k++){
+                System.out.println(results[k][j]);
+            }
+
         }
     }
 
