@@ -13,30 +13,45 @@ public class Iterative {
     Genome gen;
     static int MAX;
     boolean solutionFound;
+    long minTime;
 
     public Iterative(Genome gen) {
         genomeStack = new Stack<>();
         allStates = new HashSet<>();
         maxDepth = 1;
         this.gen = gen;
-
+        minTime = 10000;
     }
 
     public void findSolution(){
-        genomeStack.push(gen);
-        solutionFound = false;
-        while (!solutionFound){
-            if (genomeStack.isEmpty() || genomeStack.peek().countSwaps==maxDepth){
+        //while(true){
+            maxDepth = 1;
+            long startTime = System.currentTimeMillis();
+            genomeStack.push(gen);
+            solutionFound = false;
+            while (!solutionFound){
+                if (genomeStack.isEmpty() || genomeStack.peek().countSwaps==maxDepth) {
 
-                maxDepth++;
-                System.out.println("=========" + maxDepth);
-                genomeStack.push(gen);
-                allStates.clear();
-
+                    maxDepth++;
+                    System.out.println(maxDepth);                    long endTime   = System.currentTimeMillis();
+                    System.out.println(endTime - startTime);
+                    genomeStack.push(gen);
+                    allStates.clear();
+                }
+                /*
+                if(maxDepth == 3) {
+                    long endTime   = System.currentTimeMillis();
+                    long runTime = endTime - startTime;
+                    if(runTime < minTime) {
+                        minTime = runTime;
+                        System.out.println(minTime);
+                    }
+                    break;
+                }
+                */
+                createChildrenStack();
             }
-
-            createChildrenStack();
-        }
+        //}
     }
 
     private void createChildrenStack() {
@@ -47,7 +62,7 @@ public class Iterative {
                     Genome child = parent.invert(i, j);
                     child.countSwaps = parent.countSwaps + 1;
                     addChild(child);
-                    if(solutionFound) {
+                    if (solutionFound) {
                         return;
                     }
                 }

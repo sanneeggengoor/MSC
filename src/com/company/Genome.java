@@ -19,6 +19,7 @@ public class Genome {
 
 
     public Genome() {
+        //genome = createGenome();
         genome = createRandomGenome();
         countSwaps = 0;
         countDistance = 0;
