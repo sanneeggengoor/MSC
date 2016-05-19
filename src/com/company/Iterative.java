@@ -33,14 +33,15 @@ public class Iterative {
                 if (genomeStack.isEmpty() || genomeStack.peek().countSwaps==maxDepth) {
 
                     maxDepth++;
-                    System.out.println(maxDepth);                    long endTime   = System.currentTimeMillis();
+                    System.out.println(maxDepth);
+                    long endTime = System.currentTimeMillis();
                     System.out.println(endTime - startTime);
                     genomeStack.push(gen);
                     allStates.clear();
                 }
                 /*
                 if(maxDepth == 3) {
-                    long endTime   = System.currentTimeMillis();
+                    long endTime = System.currentTimeMillis();
                     long runTime = endTime - startTime;
                     if(runTime < minTime) {
                         minTime = runTime;

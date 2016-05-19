@@ -19,8 +19,8 @@ public class Genome {
 
 
     public Genome() {
-        //genome = createGenome();
-        genome = createRandomGenome();
+        genome = createGenome();
+        //genome = createRandomGenome();
         countSwaps = 0;
         countDistance = 0;
         movedGenes = 0;
@@ -171,7 +171,7 @@ public class Genome {
                 schatting++;
             }
         }
-        schatting = schatting/1;
+        schatting = schatting/2;
         return schatting + this.countSwaps;
        //return schatting + this.movedGenes;
     }

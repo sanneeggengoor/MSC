@@ -30,8 +30,15 @@ public class Astar {
         while (!solutionFound){
             createChildrenPrior();
             countParents++;
+            if(genomePrior.size() > 4000000) {
+                PriorityQueue<Genome> genomePrior2 = new PriorityQueue<Genome>(comparator);
+                for(int i = 0; i < 2000000; i++) {
+                    genomePrior2.add(genomePrior.poll());
+                }
+                genomePrior = genomePrior2;
+            }
             if(countParents % 200 == 0){
-                //System.out.println(countParents);
+                System.out.println(countParents);
             }
         }
         Genome finalgen = genomePrior.poll();
@@ -39,7 +46,7 @@ public class Astar {
             finalgen = genomePrior.poll();
         }
         genomePrior.add(finalgen);
-        //finalgen.printPath();
+        finalgen.printPath();
     }
 
     private void createChildrenPrior() {

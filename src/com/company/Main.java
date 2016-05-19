@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         Genome gen = new Genome();
-        Iterative trial = new Iterative(gen);
+        Astar trial = new Astar(gen);
         trial.findSolution();
 
         //Genome[] testSet = gen.makeTestSet(100);
