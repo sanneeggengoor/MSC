@@ -30,12 +30,13 @@ public class Astar {
         while (!solutionFound){
             createChildrenPrior();
             countParents++;
-            if(genomePrior.size() > 4000000) {
+            if(genomePrior.size() > 400000) {
                 PriorityQueue<Genome> genomePrior2 = new PriorityQueue<Genome>(comparator);
-                for(int i = 0; i < 2000000; i++) {
+                for(int i = 0; i < 200000; i++) {
                     genomePrior2.add(genomePrior.poll());
                 }
                 genomePrior = genomePrior2;
+                System.out.println("-------new queue-------");
             }
             if(countParents % 200 == 0){
                 System.out.println(countParents);
