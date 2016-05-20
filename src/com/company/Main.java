@@ -14,8 +14,10 @@ public class Main {
 
     public static void main(String[] args) {
         Genome gen = new Genome();
-        Astar trial = new Astar(gen);
-        trial.findSolution();
+        //Astar trial = new Astar(gen);
+        //trial.findSolution();
+        System.out.println(Arrays.toString(gen.makeTestSet(5)));
+        System.out.println(Arrays.toString(gen.makeTestSet(5)));
 
         //Genome[] testSet = gen.makeTestSet(100);
         //TestAndScore trial =  new TestAndScore();

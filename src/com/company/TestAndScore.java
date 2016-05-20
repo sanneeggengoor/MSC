@@ -2,9 +2,6 @@ package com.company;
 
 import java.util.Arrays;
 
-/**
- * Created by Sanne on 11-5-2016.
- */
 public class TestAndScore {
     private int[][] results;
     private Genome[] testSet;
@@ -34,8 +31,8 @@ public class TestAndScore {
             System.out.println("Genome no. "+ no);
             System.out.println(testSet[i]);
             Genome genHeuristic = heuristic[i];
-            System.out.println("Heuristic steps needed: " + genHeuristic.countSwaps);
-            System.out.println("Crossed distance: "+ genHeuristic.countDistance);
+            System.out.println("Heuristic steps needed: " + genHeuristic.getCountSwaps());
+            System.out.println("Crossed distance: "+ genHeuristic.getCountSwaps());
             System.out.println("Heuristic percentile: " + getPercentile(i));
 
         }
@@ -68,9 +65,9 @@ public class TestAndScore {
             trial.findSolution();
             Genome finalgen = trial.getFinalGen();
             heuristic[i] = finalgen;
-            results[i][0] = finalgen.countSwaps;
-            scoreHeuristic[i] = finalgen.countDistance;
-            results[i][1] = finalgen.countDistance;
+            results[i][0] = finalgen.getCountSwaps();
+            scoreHeuristic[i] = finalgen.getCountSwaps();
+            results[i][1] = finalgen.getCountSwaps();
             //System.out.println(i);
         }
     }
