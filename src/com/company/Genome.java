@@ -2,20 +2,16 @@ package com.company;
 
 import java.util.Random;
 
-
-/**
- * Created by Sanne on 18-2-2016.
- */
 public class Genome {
     public int[] genome;
-    int countSwaps;
-    int countDistance;
-    int movedGenes;
-    double scoreSwap;
-    double scoreDistance;
-    Genome previous;
+    private int countSwaps;
+    private int countDistance;
+    private int movedGenes;
+    private double scoreSwap;
+    private double scoreDistance;
+    private Genome previous;
 
-    private Random rgen = new Random();
+    private static Random rgen = new Random();
 
 
     public Genome() {
@@ -39,13 +35,6 @@ public class Genome {
     }
 
     private int[] createGenome(){
-
-        /*
-        int[] genomeCreate = {
-                3, 2, 1, 4, 6, 5, 8, 7, 9, 10, 11, 12, 13, 14,
-                20, 19, 18, 17, 16, 15, 21, 22, 23, 24, 25
-        }; */
-
         return new int[]{
                 23, 1, 2, 11, 24, 22, 19, 6, 10, 7, 25, 20,
                 5, 8, 18, 12, 13, 14, 15, 16, 17,
@@ -62,7 +51,6 @@ public class Genome {
                 random = random % 25;
             }
             rGenome[random] = i;
-
         }
         return rGenome;
     }
@@ -79,15 +67,15 @@ public class Genome {
     }
 
     public Genome invert(int a, int b){
-        int[] inverseGen= new int[25];
+        int[] inverseGen = new int[25];
         Genome child = new Genome(this);
         for(int i = a; i<=b; i++){
             int x = b - i + a;
             inverseGen[i-1] = child.genome[x-1];
         }
         System.arraycopy(inverseGen, a - 1, child.genome, a - 1, b + 1 - a);
-        //child.previous = this;
-        int distance = b-a;
+        child.previous = this;
+        int distance = calculateDistance(a,b);
         child.countSwaps = this.countSwaps + 1;
         child.countDistance = this.countDistance + distance;
         child.movedGenes = this.movedGenes + Math.abs(a - b);
@@ -99,20 +87,21 @@ public class Genome {
 
     // This function calculates the distance that is added to the total distance when inverting
     // from low to high (Kan mooier nog hoor, maar hij werkt iig)
+    // WAAROM???? Je kan gewoon tellen hoeveel genen je swapt
     private int calculateDistance(int low,int high){
         int distance = high - low;
         int dis = high - low;
         int finaldistance = distance;
         while(distance >1){
             distance = distance - 2;
-            finaldistance = finaldistance + distance;
+            finaldistance += distance;
         }
         if(distance ==1){
            finaldistance++;
         }
         while(distance < dis){
             distance = distance + 2;
-            finaldistance = finaldistance + distance;
+            finaldistance += distance;
             //System.out.println("Loop? "+ high + low);
         }
         //System.out.println("Geen loop in dit");
@@ -129,9 +118,7 @@ public class Genome {
             }
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     public int hashCode() {
@@ -171,9 +158,7 @@ public class Genome {
                 schatting++;
             }
         }
-        schatting = schatting/1;
-        return schatting + this.countSwaps;
-       //return schatting + this.movedGenes;
+        return schatting/2 + this.countSwaps;
     }
 
     /**
@@ -190,7 +175,7 @@ public class Genome {
                 schatting++;
             }
         }
-        int distance = 13;
+        int distance = calculateDistance(1,14);
         return distance*schatting/2 + this.countDistance;
     }
 
@@ -207,21 +192,29 @@ public class Genome {
         }
     }
 
-    public boolean checkSolution() {
-        if (IsSolution()) {
-            //System.out.println("Solution found" + this);
-
-            return true;
-        }
-        return false;
-    }
-
     public boolean IsSolution() {
         for (int i = 0; i < 25; i++) {
             if (this.genome[i] != i + 1) {
                 return false;
             }
         }
+        //System.out.println("Solution found" + this);
         return true;
+    }
+
+    public int getCountSwaps() {
+        return countSwaps;
+    }
+
+    public double getscoreSwap() {
+        return scoreSwap;
+    }
+
+    public double getscoreDistance() {
+        return scoreDistance;
+    }
+
+    public int getcountDistance() {
+        return countDistance;
     }
 }

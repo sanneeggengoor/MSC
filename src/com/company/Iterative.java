@@ -3,15 +3,11 @@ package com.company;
 import java.util.HashSet;
 import java.util.Stack;
 
-/**
- * Created by Sanne on 17-3-2016.
- */
 public class Iterative {
     Stack<Genome> genomeStack;
     HashSet<Genome> allStates;
     int maxDepth;
     Genome gen;
-    static int MAX;
     boolean solutionFound;
     long minTime;
 
@@ -30,17 +26,17 @@ public class Iterative {
             genomeStack.push(gen);
             solutionFound = false;
             while (!solutionFound){
-                if (genomeStack.isEmpty() || genomeStack.peek().countSwaps==maxDepth) {
-
+                if (genomeStack.isEmpty() || genomeStack.peek().getCountSwaps() == maxDepth) {
                     maxDepth++;
-                    System.out.println(maxDepth);                    long endTime   = System.currentTimeMillis();
+                    System.out.println(maxDepth);
+                    long endTime = System.currentTimeMillis();
                     System.out.println(endTime - startTime);
                     genomeStack.push(gen);
                     allStates.clear();
                 }
                 /*
                 if(maxDepth == 3) {
-                    long endTime   = System.currentTimeMillis();
+                    long endTime = System.currentTimeMillis();
                     long runTime = endTime - startTime;
                     if(runTime < minTime) {
                         minTime = runTime;
@@ -60,7 +56,6 @@ public class Iterative {
             for (int j = i; j < 26; j++) {
                 if(parent.forbiddenBefore(i) && parent.forbiddenAfter(j)) {
                     Genome child = parent.invert(i, j);
-                    child.countSwaps = parent.countSwaps + 1;
                     addChild(child);
                     if (solutionFound) {
                         return;
@@ -72,8 +67,8 @@ public class Iterative {
 
     private void addChild(Genome child) {
         if (!allStates.contains(child)) {
-            solutionFound = child.checkSolution();
-            if (child.countSwaps < maxDepth) {
+            solutionFound = child.IsSolution();
+            if (child.getCountSwaps() < maxDepth) {
                 genomeStack.push(child);
             }
             allStates.add(child);

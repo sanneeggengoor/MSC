@@ -4,39 +4,39 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 
-/**
- * Created by Sanne on 17-4-2016.
- */
 public class Astar {
     Comparator<Genome> comparator = new GenomeComparator();
     private PriorityQueue<Genome> genomePrior;
-    HashSet<Genome> allStates;
-    Genome gen;
-    int timesResized;
-    int numOfQueue;
-    boolean solutionFound;
+    private HashSet<Genome> allStates;
+    private Genome gen;
+    private boolean solutionFound;
+    private int countStates;
 
     public Astar(Genome gen) {
-        genomePrior = new PriorityQueue<Genome>(comparator);
-        // Even bij zetten dat we deze een set hebben gemaakt voor geheugenbesparing
-        allStates = new HashSet<>();
+        genomePrior = new PriorityQueue<>(comparator);
+       allStates = new HashSet<>();
         this.gen = gen;
         solutionFound = false;
-        numOfQueue = 0;
-        timesResized = 0;
     }
 
     public void findSolution(){
-        int countParents = 0;
+        countStates = 0;
         genomePrior.add(gen);
         // dit is die 0 die hij telkens uitprint, dan weet je hoeveel heuristische hij al heeft opgelost.
-        System.out.println(gen.countDistance);
+        System.out.println(gen.getcountDistance());
         solutionFound = false;
         while (!solutionFound){
             createChildrenPrior();
-            countParents++;
-            if(countParents % 200 == 0){
-                //System.out.println(countParents);
+            if(genomePrior.size() > 5000000) {
+                PriorityQueue<Genome> genomePrior2 = new PriorityQueue<>(comparator);
+                for(int i = 0; i < 4500000; i++) {
+                    genomePrior2.add(genomePrior.poll());
+                }
+                genomePrior = genomePrior2;
+                System.out.println("-------new queue-------");
+            }
+            if(countStates % 2000 == 0){
+                System.out.println(countStates);
             }
         }
         Genome finalgen = genomePrior.poll();
@@ -44,27 +44,18 @@ public class Astar {
             finalgen = genomePrior.poll();
         }
         genomePrior.add(finalgen);
-        //finalgen.printPath();
+        finalgen.printPath();
     }
 
     private void createChildrenPrior() {
-        numOfQueue--;
         Genome parent = genomePrior.poll();
-        if(genomePrior.size()>4000000){
-            timesResized++;
-            resize();
-        }
-        if(genomePrior.size() %1000 == 0){
-            System.out.println(timesResized+ "  " +genomePrior.size());
-        }
         //System.out.println(parent.countDistance);
         for (int i = 1; i < 25; i++) {
             for (int j = i; j < 26; j++) {
                 if(parent.forbiddenBefore(i) && parent.forbiddenAfter(j)) {
                     Genome child = parent.invert(i, j);
-                    //System.out.println("AScore" + child.aStarscore());
-                    //System.out.println("Score" + child.score);
                     addChild(child);
+                    countStates++;
                 }
             }
         }
@@ -87,19 +78,16 @@ public class Astar {
     }
 
     public Genome getFinalGen(){
-        Genome finalGen = genomePrior.peek();
-        return finalGen;
+        return genomePrior.peek();
     }
 
     private void addChild(Genome child) {
-        if (!allStates.contains(child)) {
-            if(child.checkSolution()){
-                solutionFound = true;
-            }
-            numOfQueue ++;
+        //if (!allStates.contains(child)) {
+            solutionFound = child.IsSolution();
+
             genomePrior.add(child);
-            allStates.add(child);
-        }
+            //allStates.add(child);
+        //}
     }
 
 
