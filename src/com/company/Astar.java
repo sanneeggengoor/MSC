@@ -10,7 +10,7 @@ public class Astar {
     private HashSet<Genome> allStates;
     private Genome gen;
     private boolean solutionFound;
-    private int countStates;
+    private long countStates;
 
     public Astar(Genome gen) {
         genomePrior = new PriorityQueue<>(comparator);

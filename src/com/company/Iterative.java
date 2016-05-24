@@ -20,7 +20,8 @@ public class Iterative {
         minTime = 10000;
     }
 
-    public void findSolution(){
+    // findSolution(1) calculates the solution using the heuristic
+    public void findSolution(int n){
         countStates = 0;
         maxDepth = 1;
         long startTime = System.currentTimeMillis();
@@ -33,27 +34,11 @@ public class Iterative {
                 genomeStack.push(gen);
                 allStates.clear();
             }
-            createChildrenStack();
-            if(countStates % 200 == 0) {
-                System.out.println(countStates);
+            if(n == 1) {
+                createChildrenStack_Heuristic();
+            } else {
+                createChildrenStack();
             }
-        }
-    }
-
-    public void findHeuristicSolution(){
-        countStates = 0;
-        maxDepth = 1;
-        long startTime = System.currentTimeMillis();
-        genomeStack.push(gen);
-        solutionFound = false;
-        while (!solutionFound){
-            if (genomeStack.isEmpty() || genomeStack.peek().getCountSwaps() == maxDepth) {
-                maxDepth++;
-                System.out.println(maxDepth);
-                genomeStack.push(gen);
-                allStates.clear();
-            }
-            createChildrenStack_Heuristic();
             if(countStates % 200 == 0) {
                 System.out.println(countStates);
             }
@@ -62,7 +47,9 @@ public class Iterative {
 
     // Returns the shortest time the algorithm reached depth 3 after
     // number_iterations iterations
-    public long reachDepth3(int number_iterations) {
+    // reachDepth3(1000,1) uses the heuristic, any other number instead of 1
+    // does not use the heuristic
+    public long reachDepth3(int number_iterations, int n) {
         for (int i = 0; i < number_iterations; i++) {
             countStates = 0;
             maxDepth = 1;
@@ -84,37 +71,11 @@ public class Iterative {
                     }
                     break;
                 }
-                createChildrenStack();
-            }
-        }
-        return minTime;
-    }
-
-    // Returns the shortest time the algorithm reached depth 3 using the
-    // heuristic after number_iterations iterations
-    public long reachDepth3Heuristic(int number_iterations) {
-        for (int i = 0; i < number_iterations; i++) {
-            countStates = 0;
-            maxDepth = 1;
-            long startTime = System.currentTimeMillis();
-            genomeStack.push(gen);
-            solutionFound = false;
-            while (!solutionFound) {
-                if (genomeStack.isEmpty() || genomeStack.peek().getCountSwaps() == maxDepth) {
-                    maxDepth++;
-                    genomeStack.push(gen);
-                    allStates.clear();
+                if(n == 1) {
+                    createChildrenStack_Heuristic();
+                } else {
+                    createChildrenStack();
                 }
-                if (maxDepth == 3) {
-                    long endTime = System.currentTimeMillis();
-                    long runTime = endTime - startTime;
-                    if (runTime < minTime) {
-                        minTime = runTime;
-                        System.out.println(minTime);
-                    }
-                    break;
-                }
-                createChildrenStack_Heuristic();
             }
         }
         return minTime;
