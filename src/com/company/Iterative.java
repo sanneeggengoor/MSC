@@ -21,7 +21,7 @@ public class Iterative {
     }
 
     // findSolution(1) calculates the solution using the heuristic
-    public void findSolution(int n){
+    public void findSolution(boolean heuristic){
         countStates = 0;
         maxDepth = 1;
         long startTime = System.currentTimeMillis();
@@ -34,7 +34,7 @@ public class Iterative {
                 genomeStack.push(gen);
                 allStates.clear();
             }
-            if(n == 1) {
+            if(heuristic) {
                 createChildrenStack_Heuristic();
             } else {
                 createChildrenStack();
@@ -47,9 +47,8 @@ public class Iterative {
 
     // Returns the shortest time the algorithm reached depth 3 after
     // number_iterations iterations
-    // reachDepth3(1000,1) uses the heuristic, any other number instead of 1
-    // does not use the heuristic
-    public long reachDepth3(int number_iterations, int n) {
+    // The boolean heuristic tells if the heuristic is used
+    public long reachDepth3(int number_iterations, boolean heuristic) {
         for (int i = 0; i < number_iterations; i++) {
             countStates = 0;
             maxDepth = 1;
@@ -71,7 +70,7 @@ public class Iterative {
                     }
                     break;
                 }
-                if(n == 1) {
+                if(heuristic) {
                     createChildrenStack_Heuristic();
                 } else {
                     createChildrenStack();
