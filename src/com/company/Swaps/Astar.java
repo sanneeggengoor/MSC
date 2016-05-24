@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Swaps;
 
 import java.util.Comparator;
 import java.util.HashSet;
@@ -23,7 +23,6 @@ public class Astar {
         countStates = 0;
         genomePrior.add(gen);
         // dit is die 0 die hij telkens uitprint, dan weet je hoeveel heuristische hij al heeft opgelost.
-        System.out.println(gen.getcountDistance());
         solutionFound = false;
         while (!solutionFound){
             createChildrenPrior();

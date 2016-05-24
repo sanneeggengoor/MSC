@@ -1,8 +1,7 @@
-package com.company;
+package com.company.Swaps;
 
-/**
- * Created by Maaike on 11-5-2016.
- */
+import com.company.Swaps.Genome;
+
 import java.util.Random;
 
 public class RandomSolution {
@@ -49,6 +48,10 @@ public class RandomSolution {
                 end_invert = rnd.nextInt(25 - start_invert) + start_invert + 1;
             }
         return newgen.invert(start_invert, end_invert);
+    }
+
+    public int[] getRandomScores() {
+        return randomScores;
     }
 
 }
