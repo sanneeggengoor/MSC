@@ -1,4 +1,4 @@
-package com.company.Swaps;
+package com.company;
 
 import java.util.Random;
 
@@ -79,6 +79,7 @@ public class Genome {
         child.countDistance = this.countDistance + distance;
         child.movedGenes = this.movedGenes + Math.abs(a - b);
         child.scoreSwap = child.aStarscoreSwaps();
+        child.scoreDistance = child.aStarscoreDistance();
 
         return child;
     }
@@ -159,6 +160,35 @@ public class Genome {
         return estimate/2 + this.countSwaps;
     }
 
+    public double aStarscoreDistance(){
+        double estimate = 0;
+        int[] gen = this.genome;
+        for (int i = 1; i < 25; i++ ){
+            if(forbiddenAfter(i)){
+                estimate++;
+            }
+        }
+        return estimate + this.countDistance;
+    }
+
+    /**
+     * Deze functie geeft in ieder geval een schatting terug die werkt. Hij berekent eerst het aantal swaps dat
+     * minimaal nog gedaan moet worden (schatting/2) en doet dat keer de afstand van een gemiddelde swap (lengte 12,5)
+     * dus ik doe maar van 1 tot 14 (=lengte 13). En dan voegt hij de afstand die nu al is afgelegd er aantoe.
+     *
+     */
+    public double ScoreDistance(){
+        double estimate = 0;
+        int[] gen = this.genome;
+        for (int i = 1; i < 25; i++ ){
+            if(forbiddenAfter(i)){
+                estimate++;
+            }
+        }
+        int distance = calculateDistance(1,14);
+        return distance*estimate/2 + this.countDistance;
+    }
+
     public void printPath(){
         if (previous != null) {
 
@@ -191,5 +221,9 @@ public class Genome {
 
     public int getcountDistance() {
         return countDistance;
+    }
+
+    public double getscoreDistance() {
+        return scoreDistance;
     }
 }

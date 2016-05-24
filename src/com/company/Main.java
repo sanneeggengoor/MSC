@@ -1,19 +1,26 @@
 package com.company;
 
-import com.company.Swaps.Genome;
 
+/**
+ * Hee even een berichtje! Als je wil optimaliseren naar swaps moet je in the GenomeComparator
+ * scoreDistance veranderen in scoreSwaps :) Verder print hij na het runnen een tabelletje uit.
+ * Deze is te lezen als: eerste kolom: aantal swaps, tweede kolom: afstand, derde kolom: percentiel.
+ *
+ */
 public class Main {
 
     public static void main(String[] args) {
-        public Genome[] makeTestSet(int number) {
-            Genome[] testSet = new Genome[number];
-            // Ik doe wel setSeed() maar toch komen er elke keer andere genomen uit? Hoe kan dat??, als dit wel lukt
-            // hebben we namelijk gepaarde data, en dan kunnen we geloof ik makkelijker een test doen.
-            rgen.setSeed(2);
-            for (int i = 0; i<number; i++){
-                testSet[i] = new Genome();
-            }
-            return testSet;
+        Genome gen = new Genome();
+        Iterative trial = new Iterative(gen);
+        trial.reachDepth3(1000);
+
+        //Genome[] testSet = gen.makeTestSet(100);
+        //TestAndScore trial =  new TestAndScore();
+        //trial.printTest();
+        //RandomSolution trial = new RandomSolution(gen);
+        //System.out.println(trial.findSolutions());
+
+        //Genome[] testSet = gen.makeTestSet();
 
     }
 }
