@@ -8,11 +8,11 @@ import java.util.Random;
 public class RandomSolution {
 
     private Random rnd = new Random();
-    Genome gen;
-    Genome newgen;
-    boolean solutionFound;
-    int number_swaps;
-    int[] randomScores;
+    private Genome gen;
+    private Genome newgen;
+    private boolean solutionFound;
+    private int number_swaps;
+    private int[] randomScores;
     // Dit is een constante voor hoeveel random genomen we willen maken, staat nu op 10, want dat duurt niet lang
     private int TESTSIZE = 10;
 

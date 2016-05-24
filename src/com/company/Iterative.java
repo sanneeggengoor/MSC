@@ -4,12 +4,13 @@ import java.util.HashSet;
 import java.util.Stack;
 
 public class Iterative {
-    Stack<Genome> genomeStack;
-    HashSet<Genome> allStates;
-    int maxDepth;
-    Genome gen;
-    boolean solutionFound;
-    long minTime;
+    private Stack<Genome> genomeStack;
+    private HashSet<Genome> allStates;
+    private int maxDepth;
+    private Genome gen;
+    private boolean solutionFound;
+    private long minTime;
+    private int countStates;
 
     public Iterative(Genome gen) {
         genomeStack = new Stack<>();
@@ -21,6 +22,7 @@ public class Iterative {
 
     public void findSolution(){
         //while(true){
+            countStates = 0;
             maxDepth = 1;
             long startTime = System.currentTimeMillis();
             genomeStack.push(gen);
@@ -46,6 +48,9 @@ public class Iterative {
                 }
                 */
                 createChildrenStack();
+                if(countStates % 200 == 0) {
+                    System.out.println(countStates);
+                }
             }
         //}
     }
@@ -57,6 +62,7 @@ public class Iterative {
                 if(parent.forbiddenBefore(i) && parent.forbiddenAfter(j)) {
                     Genome child = parent.invert(i, j);
                     addChild(child);
+                    countStates++;
                     if (solutionFound) {
                         return;
                     }
