@@ -1,6 +1,8 @@
 package com.company;
 
 
+import java.util.Scanner;
+
 /**
  * Hee even een berichtje! Als je wil optimaliseren naar swaps moet je in the GenomeComparator
  * scoreDistance veranderen in scoreSwaps :) Verder print hij na het runnen een tabelletje uit.
@@ -10,7 +12,16 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Typ 1 voor optimaliseren op aantal omkeringen");
+        System.out.println("Typ 2 voor optimaliseren op aantal verplaatste allelen");
+        System.out.print("Geef keuze: ");
+        int index = scanner.nextInt();
+
         boolean swapType = true;
+        if(index == 2){
+            swapType = false;
+        }
         Genome gen = new Genome();
         TestAndScore trial = new TestAndScore();
         trial.printTest(swapType);
