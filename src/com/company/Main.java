@@ -10,9 +10,11 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
+        boolean swapType = true;
         Genome gen = new Genome();
-        Iterative trial = new Iterative(gen);
-        trial.reachDepth3(1000);
+        TestAndScore trial = new TestAndScore();
+        trial.printTest(swapType);
+
 
         //Genome[] testSet = gen.makeTestSet(100);
         //TestAndScore trial =  new TestAndScore();

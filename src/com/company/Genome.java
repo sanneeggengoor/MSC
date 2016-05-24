@@ -10,6 +10,7 @@ public class Genome {
     private double scoreSwap;
     private double scoreDistance;
     private Genome previous;
+    private boolean swapType;
 
     private static Random rgen = new Random();
 
@@ -54,7 +55,8 @@ public class Genome {
         return rGenome;
     }
 
-    public Genome[] makeTestSet(int number) {
+    public Genome[] makeTestSet(int number, boolean type) {
+        swapType = type;
         Genome[] testSet = new Genome[number];
         // Ik doe wel setSeed() maar toch komen er elke keer andere genomen uit? Hoe kan dat??, als dit wel lukt
         // hebben we namelijk gepaarde data, en dan kunnen we geloof ik makkelijker een test doen.
@@ -201,6 +203,10 @@ public class Genome {
         }
     }
 
+    public void changeType(boolean type){
+        swapType = type;
+    }
+
     public boolean IsSolution() {
         for (int i = 0; i < 25; i++) {
             if (this.genome[i] != i + 1) {
@@ -213,6 +219,14 @@ public class Genome {
 
     public int getCountSwaps() {
         return countSwaps;
+    }
+
+    public double getScore(){
+        if (swapType== true){
+            return scoreSwap;
+        } else {
+            return scoreDistance;
+        }
     }
 
     public double getscoreSwap() {

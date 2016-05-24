@@ -3,6 +3,7 @@ package com.company;
 import java.util.Arrays;
 
 public class TestAndScore {
+    private boolean swapType;
     private int[][] results;
     private Genome[] testSet;
     private Genome[] heuristic;
@@ -24,7 +25,8 @@ public class TestAndScore {
      * Ik denk trouwens, dat nu we die results[][] hebben, dat de scoreHeuristic eruit kan, maar weet ik niet
      * zeker.
      */
-    public void printTest(){
+    public void printTest(boolean type){
+        swapType = type;
         testIt();
         for(int i = 0; i < NUMBER; i++){
             int no = i+1;
@@ -55,7 +57,7 @@ public class TestAndScore {
         results = new int[NUMBER][3];
         scoreHeuristic = new int[NUMBER];
         Genome gen = new Genome();
-        testSet = gen.makeTestSet(NUMBER);
+        testSet = gen.makeTestSet(NUMBER, swapType);
         makeHeuristic(testSet);
         scoreHeuristic = new int[NUMBER];
         makeRandomSol(testSet);
@@ -65,7 +67,7 @@ public class TestAndScore {
     private void makeHeuristic(Genome[] testSet) {
         this.heuristic = new Genome[NUMBER];
         for (int i = 0; i < NUMBER; i++) {
-            Astar trial = new Astar(testSet[i]);
+            Astar trial = new Astar(testSet[i], swapType);
             trial.findSolution();
             Genome finalgen = trial.getFinalGen();
             heuristic[i] = finalgen;

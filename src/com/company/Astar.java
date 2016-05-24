@@ -9,10 +9,12 @@ public class Astar {
     private PriorityQueue<Genome> genomePrior;
     private HashSet<Genome> allStates;
     private Genome gen;
+    private boolean swapType;
     private boolean solutionFound;
     private int countStates;
 
-    public Astar(Genome gen) {
+    public Astar(Genome gen, boolean type) {
+        swapType= type;
         genomePrior = new PriorityQueue<>(comparator);
        allStates = new HashSet<>();
         this.gen = gen;
@@ -54,6 +56,7 @@ public class Astar {
             for (int j = i; j < 26; j++) {
                 if(parent.forbiddenBefore(i) && parent.forbiddenAfter(j)) {
                     Genome child = parent.invert(i, j);
+                    child.changeType(swapType);
                     addChild(child);
                     countStates++;
                 }
