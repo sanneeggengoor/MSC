@@ -11,7 +11,7 @@ public class Astar {
     private Genome gen;
     private boolean swapType;
     private boolean solutionFound;
-    private int countStates;
+    private long countStates;
 
     public Astar(Genome gen, boolean type) {
         swapType= type;
