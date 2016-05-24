@@ -1,7 +1,7 @@
 package com.company;
 
 /**
- * Created by Maaike on 11-5-2016.
+ * Met deze klasse kan er voor één genoom een bepaald aantal random oplossingen gezocht worden.
  */
 import java.util.Random;
 
@@ -10,10 +10,7 @@ public class RandomSolution {
     private Random rnd = new Random();
     Genome gen;
     Genome newgen;
-    boolean solutionFound;
-    int number_swaps;
     int[] randomScores;
-    // Dit is een constante voor hoeveel random genomen we willen maken, staat nu op 10, want dat duurt niet lang
     private int TESTSIZE = 10;
 
 
@@ -22,9 +19,13 @@ public class RandomSolution {
         randomScores = new int[TESTSIZE];
     }
 
+    /** Deze methode wordt aangeroepen om TESTSIZE aantal random genomen te maken.
+     * Eerst wordt
+     * @return
+     */
     public int[] findSolutions() {
         for(int i = 0; i<TESTSIZE; i++) {
-            number_swaps = 0;
+            int number_swaps = 0;
             newgen = gen;
             while(!newgen.IsSolution()) {
                 newgen = gen;
