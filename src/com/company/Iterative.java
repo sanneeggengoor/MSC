@@ -1,6 +1,4 @@
-package com.company.Swaps;
-
-import com.company.Swaps.Genome;
+package com.company;
 
 import java.util.HashSet;
 import java.util.Stack;

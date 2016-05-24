@@ -1,6 +1,4 @@
-package com.company.Swaps;
-
-import com.company.Swaps.Genome;
+package com.company;
 
 public class SimpleAlgorithm {
     private Genome gen;
