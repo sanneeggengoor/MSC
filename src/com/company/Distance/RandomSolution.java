@@ -8,7 +8,6 @@ public class RandomSolution {
     private Genome gen;
     private Genome newgen;
     private boolean solutionFound;
-    private int number_swaps;
     private int[] randomScores;
     // Dit is een constante voor hoeveel random genomen we willen maken, staat nu op 10, want dat duurt niet lang
     private int TESTSIZE = 10;
@@ -21,7 +20,7 @@ public class RandomSolution {
 
     public int[] findSolutions() {
         for(int i = 0; i<TESTSIZE; i++) {
-            number_swaps = 0;
+            int number_swaps = 0;
             newgen = gen;
             while(!newgen.IsSolution()) {
                 newgen = gen;
