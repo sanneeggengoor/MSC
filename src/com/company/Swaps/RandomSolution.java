@@ -1,16 +1,18 @@
-package com.company;
+package com.company.Swaps;
 
-/**
- * Met deze klasse kan er voor één genoom een bepaald aantal random oplossingen gezocht worden.
- */
+import com.company.Swaps.Genome;
+
 import java.util.Random;
 
 public class RandomSolution {
 
     private Random rnd = new Random();
-    Genome gen;
-    Genome newgen;
-    int[] randomScores;
+    private Genome gen;
+    private Genome newgen;
+    private boolean solutionFound;
+    private int number_swaps;
+    private int[] randomScores;
+    // Dit is een constante voor hoeveel random genomen we willen maken, staat nu op 10, want dat duurt niet lang
     private int TESTSIZE = 10;
 
 
@@ -19,13 +21,9 @@ public class RandomSolution {
         randomScores = new int[TESTSIZE];
     }
 
-    /** Deze methode wordt aangeroepen om TESTSIZE aantal random genomen te maken.
-     * Eerst wordt
-     * @return
-     */
     public int[] findSolutions() {
         for(int i = 0; i<TESTSIZE; i++) {
-            int number_swaps = 0;
+            number_swaps = 0;
             newgen = gen;
             while(!newgen.IsSolution()) {
                 newgen = gen;
@@ -50,6 +48,10 @@ public class RandomSolution {
                 end_invert = rnd.nextInt(25 - start_invert) + start_invert + 1;
             }
         return newgen.invert(start_invert, end_invert);
+    }
+
+    public int[] getRandomScores() {
+        return randomScores;
     }
 
 }

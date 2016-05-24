@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Swaps;
 
 import java.util.Arrays;
 
@@ -87,7 +87,7 @@ public class TestAndScore {
     }
 
     private double getPercentile(int index){
-        int[] ranScores = rSol[index].randomScores;
+        int[] ranScores = rSol[index].getRandomScores();
         int prepercentile = 0;
         Arrays.sort(ranScores);
         for (int i = 0; i < ranScores.length; i++){

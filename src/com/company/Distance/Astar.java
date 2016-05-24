@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Distance;
 
 import java.util.Comparator;
 import java.util.HashSet;
@@ -14,7 +14,7 @@ public class Astar {
 
     public Astar(Genome gen) {
         genomePrior = new PriorityQueue<>(comparator);
-       allStates = new HashSet<>();
+        allStates = new HashSet<>();
         this.gen = gen;
         solutionFound = false;
     }
@@ -59,22 +59,6 @@ public class Astar {
                 }
             }
         }
-    }
-
-    private void resize(){
-        Genome[] newPQ = new Genome[1000000];
-        for(int i = 0; i < 1000000; i++){
-            Genome gen = genomePrior.poll();
-            newPQ[i] = gen;
-        }
-        genomePrior.clear();
-        int j = 1000000;
-        while (j>0){
-            j--;
-            genomePrior.add(newPQ[j]);
-            newPQ[j]=null;
-        }
-
     }
 
     public Genome getFinalGen(){
