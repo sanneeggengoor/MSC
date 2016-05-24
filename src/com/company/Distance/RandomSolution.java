@@ -1,19 +1,17 @@
-package com.company;
+package com.company.Distance;
 
 /**
  * Met deze klasse kan er voor één genoom een bepaald aantal random oplossingen gezocht worden.
  */
+
 import java.util.Random;
 
 public class RandomSolution {
-
     private Random rnd = new Random();
     private Genome gen;
     private Genome newgen;
-    private boolean solutionFound;
-    private int number_swaps;
     private int[] randomScores;
-    // Dit is een constante voor hoeveel random genomen we willen maken, staat nu op 10, want dat duurt niet lang
+    // Dit is een constante voor hoeveel random oplossingen we willen maken, staat nu op 10, want dat duurt niet lang
     private int TESTSIZE = 10;
 
 
