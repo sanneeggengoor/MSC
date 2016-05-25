@@ -15,8 +15,8 @@ public class Genome {
     private static Random rgen = new Random();
 
     public Genome() {
-        genome = createGenome();
-        //genome = createRandomGenome();
+        //genome = createGenome();
+        genome = createRandomGenome();
         countSwaps = 0;
         countDistance = 0;
         movedGenes = 0;
@@ -58,8 +58,6 @@ public class Genome {
     public Genome[] makeTestSet(int number, boolean type) {
         swapType = type;
         Genome[] testSet = new Genome[number];
-        // Ik doe wel setSeed() maar toch komen er elke keer andere genomen uit? Hoe kan dat??, als dit wel lukt
-        // hebben we namelijk gepaarde data, en dan kunnen we geloof ik makkelijker een test doen.
         rgen.setSeed(2);
         for (int i = 0; i<number; i++){
             testSet[i] = new Genome();
@@ -76,7 +74,7 @@ public class Genome {
         }
         System.arraycopy(inverseGen, a - 1, child.genome, a - 1, b + 1 - a);
         child.previous = this;
-        int distance = calculateDistance(a,b);
+        int distance = b-a+1;
         child.countSwaps = this.countSwaps + 1;
         child.countDistance = this.countDistance + distance;
         child.movedGenes = this.movedGenes + Math.abs(a - b);
@@ -159,7 +157,7 @@ public class Genome {
                 estimate++;
             }
         }
-        return estimate/2 + this.countSwaps;
+        return estimate/1.1 + this.countSwaps;
     }
 
     public double aStarscoreDistance(){
@@ -170,7 +168,7 @@ public class Genome {
                 estimate++;
             }
         }
-        return estimate + this.countDistance;
+        return estimate*15 + this.countDistance;
     }
 
     /**
@@ -216,6 +214,7 @@ public class Genome {
         //System.out.println("Solution found" + this);
         return true;
     }
+
 
     public int getCountSwaps() {
         return countSwaps;

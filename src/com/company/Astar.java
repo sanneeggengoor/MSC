@@ -21,35 +21,45 @@ public class Astar {
         solutionFound = false;
     }
 
+    // Deze functie vindt een oplossing voor het genoom.
     public void findSolution(){
+        // integer die het aantal bezochte states volgt (onafhankelijk van hoe vaak de queue geleegd is)
         countStates = 0;
+        // genoom wordt toegevoegd aan de priority queue
         genomePrior.add(gen);
-        // dit is die 0 die hij telkens uitprint, dan weet je hoeveel heuristische hij al heeft opgelost.
-        System.out.println(gen.getcountDistance());
+        // boolean die onthoudt of de oplossing al gevonden is
         solutionFound = false;
+
+        // zolang de oplossing nog niet gevonden is, wordt er doorgezocht
         while (!solutionFound){
+
+            // deze functie maakt alle kindnodes die bij het bovenste genoom van de queue horen
             createChildrenPrior();
+
+            // wanneer de queu groter is geworden dan 5.000.000, wordt er van de achterkant een stuk afgehaald.
             if(genomePrior.size() > 5000000) {
-                PriorityQueue<Genome> genomePrior2 = new PriorityQueue<>(comparator);
-                for(int i = 0; i < 4500000; i++) {
-                    genomePrior2.add(genomePrior.poll());
-                }
-                genomePrior = genomePrior2;
-                System.out.println("-------new queue-------");
+                resize();
             }
-            if(countStates % 2000 == 0){
+
+            // print soms het aantal bezochte states tot nu toe.
+            if(countStates % 2000 <= 3){
                 System.out.println(countStates);
             }
         }
+
+        // als er een oplossing is gevonden zit deze niet automatisch bovenaan, want er zijn nog meer kinderen
+        // gemaakt hierna. Dus moet er van de bovenkant afgehaald worden totdat de oplossing wel gevonden is.
         Genome finalgen = genomePrior.poll();
         while(!finalgen.IsSolution()) {
             finalgen = genomePrior.poll();
         }
+        // daarna wordt hij weer teruggelegd zodat hij zo weer teruggevonden kan worden.
         genomePrior.add(finalgen);
         finalgen.printPath();
     }
 
     private void createChildrenPrior() {
+        // bovenste wordt eraf gehaald
         Genome parent = genomePrior.poll();
         //System.out.println(parent.countDistance);
         for (int i = 1; i < 25; i++) {
@@ -65,32 +75,28 @@ public class Astar {
     }
 
     private void resize(){
-        Genome[] newPQ = new Genome[1000000];
-        for(int i = 0; i < 1000000; i++){
-            Genome gen = genomePrior.poll();
-            newPQ[i] = gen;
+        PriorityQueue<Genome> genomePrior2 = new PriorityQueue<>(comparator);
+        for(int i = 0; i < 2000000; i++) {
+            genomePrior2.add(genomePrior.poll());
         }
-        genomePrior.clear();
-        int j = 1000000;
-        while (j>0){
-            j--;
-            genomePrior.add(newPQ[j]);
-            newPQ[j]=null;
-        }
+        genomePrior = genomePrior2;
+        System.out.println("-------new queue-------");
 
     }
+
 
     public Genome getFinalGen(){
         return genomePrior.peek();
     }
 
     private void addChild(Genome child) {
-        //if (!allStates.contains(child)) {
+        //String childString = child.toString();
+        if (!allStates.contains(child)) {
             solutionFound = child.IsSolution();
 
             genomePrior.add(child);
-            //allStates.add(child);
-        //}
+           allStates.add(child);
+        }
     }
 
 
