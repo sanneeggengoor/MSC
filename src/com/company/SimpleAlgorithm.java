@@ -12,8 +12,8 @@ public class SimpleAlgorithm {
         for (int i = 0; i < 12; i++) {
             parent = invertFront(parent, i + 1);
             parent = invertBack(parent, 25 - i);
-            System.out.println(parent);
         }
+        parent.printPath();
     }
 
     private Genome invertFront(Genome parent, int num) {

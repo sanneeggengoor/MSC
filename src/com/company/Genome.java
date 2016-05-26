@@ -11,11 +11,13 @@ public class Genome {
     private Genome previous;
     private boolean swapType;
     private boolean genomeType;
+    private boolean scoreType;
 
     private static Random rgen = new Random();
 
-    public Genome(boolean type_genome) {
+    public Genome(boolean type_genome, boolean type_astar) {
         genomeType = type_genome;
+        scoreType = type_astar;
         if(genomeType) {
             genome = createGenome();
         } else {
@@ -69,14 +71,14 @@ public class Genome {
             }
         }
         for (int i = 0; i<number; i++){
-            testSet[i] = new Genome(genomeType);
+            testSet[i] = new Genome(genomeType, scoreType);
         }
         return testSet;
     }
 
     public Genome invert(int a, int b){
         int[] inverseGen = new int[25];
-        Genome child = new Genome(this.genomeType);
+        Genome child = new Genome(this.genomeType, this.scoreType);
         for(int i = a; i<=b; i++){
             int x = b - i + a;
             inverseGen[i-1] = child.genome[x-1];
@@ -85,8 +87,8 @@ public class Genome {
         child.previous = this;
         child.countSwaps = this.countSwaps + 1;
         child.countDistance = this.countDistance + Math.abs(a - b) + 1;
-        child.scoreSwap = child.aStarscoreSwaps();
-        child.scoreDistance = child.aStarscoreDistance();
+        child.scoreSwap = child.aStarscoreSwaps(scoreType);
+        child.scoreDistance = child.aStarscoreDistance(scoreType);
 
         return child;
     }
@@ -133,24 +135,29 @@ public class Genome {
         return !(invert < 24 && (row[invert] == gen + 1 | row[invert] == gen - 1));
     }
 
-
-    public double aStarscoreSwaps(){
+    public double aStarscoreSwaps(boolean astar){
         double estimate = 0;
         for (int i = 1; i < 25; i++ ){
             if(forbiddenAfter(i)){
                 estimate++;
             }
         }
+        if (astar) {
+            return estimate/2 + this.countSwaps;
+        }
         return estimate/1.5 + this.countSwaps;
     }
 
-    public double aStarscoreDistance(){
+    public double aStarscoreDistance(boolean astar){
         double estimate = 0;
         int[] gen = this.genome;
         for (int i = 1; i < 25; i++ ){
             if(forbiddenAfter(i)){
                 estimate++;
             }
+        }
+        if (astar) {
+            return estimate + this.countDistance;
         }
         return estimate*9 + this.countDistance;
     }
@@ -187,7 +194,7 @@ public class Genome {
     }
 
     public double getScore(){
-        if (swapType== true){
+        if (swapType){
             return scoreSwap;
         } else {
             return scoreDistance;
