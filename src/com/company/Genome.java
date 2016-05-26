@@ -160,7 +160,7 @@ public class Genome {
                 estimate++;
             }
         }
-        return estimate/1.7 + this.countSwaps;
+        return estimate/1.8 + this.countSwaps;
     }
 
     public double aStarscoreDistance(){
@@ -171,7 +171,7 @@ public class Genome {
                 estimate++;
             }
         }
-        return estimate*5 + this.countDistance;
+        return estimate*5.5 + this.countDistance;
     }
 
     /**
