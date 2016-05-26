@@ -57,6 +57,12 @@ public class Genome {
         swapType = type;
         Genome[] testSet = new Genome[number];
         rgen.setSeed(2);
+
+        for(int j = 0; j<33; j++){
+            for(int k = 0; k<25; k++){
+                int hoi = rgen.nextInt();
+            }
+        }
         for (int i = 0; i<number; i++){
             testSet[i] = new Genome();
         }
