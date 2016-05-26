@@ -60,7 +60,7 @@ public class Genome {
         Genome[] testSet = new Genome[number];
         rgen.setSeed(2);
 
-        for(int j = 0; j<33; j++){
+        for(int j = 0; j<46; j++){
             for(int k = 0; k<25; k++){
                 int hoi = rgen.nextInt();
             }
@@ -177,7 +177,7 @@ public class Genome {
                 estimate++;
             }
         }
-        return estimate*10 + this.countDistance;
+        return estimate*9 + this.countDistance;
     }
 
     /**

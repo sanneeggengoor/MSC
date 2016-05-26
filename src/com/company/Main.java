@@ -13,6 +13,18 @@ public class Main {
 
     public static void main(String[] args) {
 
+        /*
+        Genome genome = new Genome();
+        Genome[] testSet = genome.makeTestSet(100,true);
+        int[][] results = new int[2][100];
+        for (int i = 0; i< 100; i++){
+            SimpleAlgorithm simp = new SimpleAlgorithm(testSet[i]);
+            simp.findSolution();
+
+
+        }
+        */
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Typ 1 voor optimaliseren op aantal omkeringen");
         System.out.println("Typ 2 voor optimaliseren op aantal verplaatste allelen");
@@ -26,6 +38,8 @@ public class Main {
         TestAndScore trial = new TestAndScore();
         trial.runTest(swapType);
     }
+
+
         /*
         Genome gen = new Genome();
         Astar trial = new Astar(gen, true);
