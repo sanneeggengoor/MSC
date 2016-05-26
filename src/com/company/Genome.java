@@ -12,11 +12,11 @@ public class Genome {
     private Genome previous;
     private boolean swapType;
 
-    private static Random rgen = new Random();
+    private Random rgen = new Random();
 
     public Genome() {
-        genome = createGenome();
-        //genome = createRandomGenome();
+        //genome = createGenome();
+        genome = createRandomGenome();
         countSwaps = 0;
         countDistance = 0;
         movedGenes = 0;
@@ -160,7 +160,7 @@ public class Genome {
                 estimate++;
             }
         }
-        return estimate + this.countSwaps;
+        return estimate/1.5 + this.countSwaps;
     }
 
     public double aStarscoreDistance(){
@@ -171,7 +171,7 @@ public class Genome {
                 estimate++;
             }
         }
-        return estimate*5 + this.countDistance;
+        return estimate*5.5 + this.countDistance;
     }
 
     /**
