@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class TestAndScore {
     private boolean swapType;
+    private boolean genomeType;
     private int[][] results;
     private Genome[] testSet;
     private Genome[] heuristic;
@@ -19,13 +20,14 @@ public class TestAndScore {
         int[][] results;
 
     }
-    public void runTest(boolean type){
-        swapType = type;
+    public void runTest(boolean type_swap, boolean type_genome){
+        swapType = type_swap;
+        genomeType = type_genome;
         // results is de tabel met resultaten
         results = new int[NUMBER][3];
         scoreHeuristic = new int[NUMBER];
 
-        Genome gen = new Genome();
+        Genome gen = new Genome(genomeType);
         testSet = gen.makeTestSet(NUMBER, swapType);
 
         runHeuristic(testSet);

@@ -10,12 +10,17 @@ public class Genome {
     private double scoreDistance;
     private Genome previous;
     private boolean swapType;
+    private boolean genomeType;
 
     private static Random rgen = new Random();
 
-    public Genome() {
-        //genome = createGenome();
-        genome = createRandomGenome();
+    public Genome(boolean type_genome) {
+        genomeType = type_genome;
+        if(genomeType) {
+            genome = createGenome();
+        } else {
+            genome = createRandomGenome();
+        }
         countSwaps = 0;
         countDistance = 0;
         scoreSwap = 24;
@@ -64,14 +69,14 @@ public class Genome {
             }
         }
         for (int i = 0; i<number; i++){
-            testSet[i] = new Genome();
+            testSet[i] = new Genome(genomeType);
         }
         return testSet;
     }
 
     public Genome invert(int a, int b){
         int[] inverseGen = new int[25];
-        Genome child = new Genome(this);
+        Genome child = new Genome(this.genomeType);
         for(int i = a; i<=b; i++){
             int x = b - i + a;
             inverseGen[i-1] = child.genome[x-1];
@@ -162,8 +167,8 @@ public class Genome {
         }
     }
 
-    public void changeType(boolean type){
-        swapType = type;
+    public void changeType(boolean type_swap){
+        swapType = type_swap;
     }
 
     public boolean IsSolution() {

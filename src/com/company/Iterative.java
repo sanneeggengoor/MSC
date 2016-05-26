@@ -20,7 +20,7 @@ public class Iterative {
         minTime = 10000;
     }
 
-    // findSolution(1) calculates the solution using the heuristic
+    // findSolution(true) calculates the solution using the heuristic
     public void findSolution(boolean heuristic){
         countStates = 0;
         maxDepth = 1;
