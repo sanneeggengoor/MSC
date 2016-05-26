@@ -29,6 +29,7 @@ public class Genome {
         scoreDistance = 0;
     }
 
+    // waarom wordt dit nooit gebruikt? Hebben we het dan wel nodig?
     public Genome(Genome genome) {
         this.countSwaps = genome.countSwaps;
         this.countDistance = genome.countDistance;
@@ -159,7 +160,7 @@ public class Genome {
         if (astar) {
             return estimate + this.countDistance;
         }
-        return estimate*9 + this.countDistance;
+        return estimate*10 + this.countDistance;
     }
 
     public void printPath(){
@@ -184,7 +185,6 @@ public class Genome {
                 return false;
             }
         }
-        //System.out.println("Solution found" + this);
         return true;
     }
 
@@ -201,15 +201,7 @@ public class Genome {
         }
     }
 
-    public double getscoreSwap() {
-        return scoreSwap;
-    }
-
     public int getcountDistance() {
         return countDistance;
-    }
-
-    public double getscoreDistance() {
-        return scoreDistance;
     }
 }

@@ -24,7 +24,6 @@ public class Iterative {
     public void findSolution(boolean heuristic){
         countStates = 0;
         maxDepth = 1;
-        long startTime = System.currentTimeMillis();
         genomeStack.push(gen);
         solutionFound = false;
         while (!solutionFound){

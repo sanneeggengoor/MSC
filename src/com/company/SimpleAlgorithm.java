@@ -19,6 +19,9 @@ public class SimpleAlgorithm {
     private Genome invertFront(Genome parent, int num) {
         for (int i = 0; i < 25; i++) {
             if (parent.genome[i] == num) {
+                if (num == i + 1) {
+                    return parent;
+                }
                 return parent.invert(num, i + 1);
             }
         }
@@ -28,6 +31,9 @@ public class SimpleAlgorithm {
     private Genome invertBack(Genome parent, int num) {
         for (int i = 0; i < 25; i++) {
             if (parent.genome[i] == num) {
+                if (num == i + 1) {
+                    return parent;
+                }
                 return parent.invert(i + 1, num);
             }
         }
