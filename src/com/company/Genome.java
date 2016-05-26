@@ -147,7 +147,7 @@ public class Genome {
                 estimate++;
             }
         }
-        return estimate*8 + this.countDistance;
+        return estimate*9 + this.countDistance;
     }
 
     public void printPath(){
