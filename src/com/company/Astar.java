@@ -24,8 +24,8 @@ public class Astar {
         solutionFound = false;
 
         while (!solutionFound){
-
             createChildrenPrior();
+
             if(genomePrior.size() > 5000000) {
                 resize();
             }
@@ -48,12 +48,14 @@ public class Astar {
     private void createChildrenPrior() {
         Genome parent = genomePrior.poll();
         for (int i = 1; i < 25; i++) {
+
             for (int j = i; j < 26; j++) {
                 if(parent.forbiddenBefore(i) && parent.forbiddenAfter(j)) {
                     Genome child = parent.invert(i, j);
                     child.changeType(swapType);
                     addChild(child);
                     countStates++;
+
                     if(solutionFound) {
                         return;
                     }

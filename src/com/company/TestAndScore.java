@@ -20,14 +20,30 @@ public class TestAndScore {
 
     }
 
+
     /**
      * Dit is de functie die wordt aangeroepen vanuit de main. Hij gaat eerst testen en dan alles uitprinten.
      * Ik denk trouwens, dat nu we die results[][] hebben, dat de scoreHeuristic eruit kan, maar weet ik niet
      * zeker.
      */
-    public void printTest(boolean type){
+
+    /** Deze functie maakt eerst een testset van 100 willekeurige genomen, gaat deze dan heuristisch oplossen.
+     * (Zoals jij wil, pas t evt. aan in GenomeComparator). Daarna gaat hij t random oplossen.
+     *
+     */
+    public void runTest(boolean type){
         swapType = type;
-        testIt();
+        // results is de tabel met resultaten
+        results = new int[NUMBER][3];
+        scoreHeuristic = new int[NUMBER];
+        Genome gen = new Genome();
+        testSet = gen.makeTestSet(NUMBER, swapType);
+        makeHeuristic(testSet);
+        makeRandomSol(testSet);
+        printTest();
+    }
+
+    public void printTest(){
         for(int i = 0; i < NUMBER; i++){
             int no = i+1;
             System.out.println("Genome no. "+ no);
@@ -48,21 +64,6 @@ public class TestAndScore {
         }
     }
 
-    /** Deze functie maakt eerst een testset van 100 willekeurige genomen, gaat deze dan heuristisch oplossen.
-     * (Zoals jij wil, pas t evt. aan in GenomeComparator). Daarna gaat hij t random oplossen.
-     *
-     */
-    public void testIt(){
-        // results is de tabel met resultaten
-        results = new int[NUMBER][3];
-        scoreHeuristic = new int[NUMBER];
-        Genome gen = new Genome();
-        testSet = gen.makeTestSet(NUMBER, swapType);
-        makeHeuristic(testSet);
-        scoreHeuristic = new int[NUMBER];
-        makeRandomSol(testSet);
-
-    }
 
     private void makeHeuristic(Genome[] testSet) {
         this.heuristic = new Genome[NUMBER];
@@ -98,13 +99,13 @@ public class TestAndScore {
             }
         }
         prepercentile = ranScores.length - prepercentile;
-        double percentile = (prepercentile/ranScores.length)*100 ;
+        double percentile = 100 - (prepercentile/ranScores.length)*100 ;
         System.out.println();
         //for(int i = 0; i < 25; i++ ){
             //System.out.print(ranScores[i]+" ");
         //}
         results[index][2]= (int) percentile;
-        return 100 - percentile;
+        return  100 - percentile;
     }
 
 

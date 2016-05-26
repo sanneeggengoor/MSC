@@ -74,7 +74,7 @@ public class Genome {
         }
         System.arraycopy(inverseGen, a - 1, child.genome, a - 1, b + 1 - a);
         child.previous = this;
-        int distance = b-a+1;
+        int distance = calculateDistance(a,b);
         child.countSwaps = this.countSwaps + 1;
         child.countDistance = this.countDistance + distance;
         child.movedGenes = this.movedGenes + Math.abs(a - b);
@@ -160,7 +160,7 @@ public class Genome {
                 estimate++;
             }
         }
-        return estimate/1.7 + this.countSwaps;
+        return estimate + this.countSwaps;
     }
 
     public double aStarscoreDistance(){
