@@ -6,7 +6,6 @@ public class Genome {
     public int[] genome;
     private int countSwaps;
     private int countDistance;
-    private int movedGenes;
     private double scoreSwap;
     private double scoreDistance;
     private Genome previous;
@@ -19,7 +18,6 @@ public class Genome {
         genome = createRandomGenome();
         countSwaps = 0;
         countDistance = 0;
-        movedGenes = 0;
         scoreSwap = 24;
         scoreDistance = 0;
     }
@@ -74,40 +72,12 @@ public class Genome {
         }
         System.arraycopy(inverseGen, a - 1, child.genome, a - 1, b + 1 - a);
         child.previous = this;
-        int distance = b-a+1;
         child.countSwaps = this.countSwaps + 1;
-        child.countDistance = this.countDistance + distance;
-        child.movedGenes = this.movedGenes + Math.abs(a - b) + 1;
+        child.countDistance = this.countDistance + Math.abs(a - b) + 1;
         child.scoreSwap = child.aStarscoreSwaps();
         child.scoreDistance = child.aStarscoreDistance();
 
         return child;
-    }
-
-    // This function calculates the distance that is added to the total distance when inverting
-    // from low to high (Kan mooier nog hoor, maar hij werkt iig)
-    // WAAROM???? Je kan gewoon tellen hoeveel genen je swapt
-    private int calculateDistance(int low,int high){
-        return high - low + 1;
-        /*
-        int distance = high - low;
-        int dis = high - low;
-        int finaldistance = distance;
-        while(distance >1){
-            distance = distance - 2;
-            finaldistance += distance;
-        }
-        if(distance ==1){
-           finaldistance++;
-        }
-        while(distance < dis){
-            distance = distance + 2;
-            finaldistance += distance;
-            //System.out.println("Loop? "+ high + low);
-        }
-        //System.out.println("Geen loop in dit");
-        return finaldistance;
-        */
     }
 
     public boolean equals(Object other) {
@@ -171,25 +141,7 @@ public class Genome {
                 estimate++;
             }
         }
-        return estimate*5.5 + this.countDistance;
-    }
-
-    /**
-     * Deze functie geeft in ieder geval een schatting terug die werkt. Hij berekent eerst het aantal swaps dat
-     * minimaal nog gedaan moet worden (schatting/2) en doet dat keer de afstand van een gemiddelde swap (lengte 12,5)
-     * dus ik doe maar van 1 tot 14 (=lengte 13). En dan voegt hij de afstand die nu al is afgelegd er aantoe.
-     *
-     */
-    public double ScoreDistance(){
-        double estimate = 0;
-        int[] gen = this.genome;
-        for (int i = 1; i < 25; i++ ){
-            if(forbiddenAfter(i)){
-                estimate++;
-            }
-        }
-        int distance = calculateDistance(1,14);
-        return distance*estimate/2 + this.countDistance;
+        return estimate*8 + this.countDistance;
     }
 
     public void printPath(){
