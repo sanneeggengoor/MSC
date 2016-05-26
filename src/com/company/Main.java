@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        /*
         Scanner scanner = new Scanner(System.in);
         System.out.println("Typ 1 voor optimaliseren op aantal omkeringen");
         System.out.println("Typ 2 voor optimaliseren op aantal verplaatste allelen");
@@ -25,7 +26,10 @@ public class Main {
         Genome gen = new Genome();
         TestAndScore trial = new TestAndScore();
         trial.printTest(swapType);
-
+        */
+        Genome gen = new Genome();
+        Astar trial = new Astar(gen, true);
+        trial.findSolution();
 
         //Genome[] testSet = gen.makeTestSet(100);
         //TestAndScore trial =  new TestAndScore();

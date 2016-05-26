@@ -15,8 +15,8 @@ public class Genome {
     private static Random rgen = new Random();
 
     public Genome() {
-        //genome = createGenome();
-        genome = createRandomGenome();
+        genome = createGenome();
+        //genome = createRandomGenome();
         countSwaps = 0;
         countDistance = 0;
         movedGenes = 0;
@@ -88,6 +88,8 @@ public class Genome {
     // from low to high (Kan mooier nog hoor, maar hij werkt iig)
     // WAAROM???? Je kan gewoon tellen hoeveel genen je swapt
     private int calculateDistance(int low,int high){
+        return high - low + 1;
+        /*
         int distance = high - low;
         int dis = high - low;
         int finaldistance = distance;
@@ -105,6 +107,7 @@ public class Genome {
         }
         //System.out.println("Geen loop in dit");
         return finaldistance;
+        */
     }
 
     public boolean equals(Object other) {
@@ -157,7 +160,7 @@ public class Genome {
                 estimate++;
             }
         }
-        return estimate/1.1 + this.countSwaps;
+        return estimate/1.7 + this.countSwaps;
     }
 
     public double aStarscoreDistance(){
@@ -168,7 +171,7 @@ public class Genome {
                 estimate++;
             }
         }
-        return estimate*15 + this.countDistance;
+        return estimate*5 + this.countDistance;
     }
 
     /**
