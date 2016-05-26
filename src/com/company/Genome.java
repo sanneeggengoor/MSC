@@ -77,7 +77,7 @@ public class Genome {
         int distance = b-a+1;
         child.countSwaps = this.countSwaps + 1;
         child.countDistance = this.countDistance + distance;
-        child.movedGenes = this.movedGenes + Math.abs(a - b);
+        child.movedGenes = this.movedGenes + Math.abs(a - b) + 1;
         child.scoreSwap = child.aStarscoreSwaps();
         child.scoreDistance = child.aStarscoreDistance();
 
