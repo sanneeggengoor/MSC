@@ -7,27 +7,34 @@ public class TestAndScore {
     private int[][] results;
     private Genome[] testSet;
     private Genome[] heuristic;
-    private RandomSolution[] rSol;
+    private RandomSolution[] randomSol;
     private int[] scoreHeuristic;
     public static final int NUMBER = 100;
 
     public TestAndScore(){
         Genome[] testSet;
         Genome[] heuristic;
-        RandomSolution[] rSol;
+        RandomSolution[] randomSol;
         int[] scoreHeuristic;
         int[][] results;
 
     }
-
-    /**
-     * Dit is de functie die wordt aangeroepen vanuit de main. Hij gaat eerst testen en dan alles uitprinten.
-     * Ik denk trouwens, dat nu we die results[][] hebben, dat de scoreHeuristic eruit kan, maar weet ik niet
-     * zeker.
-     */
-    public void printTest(boolean type){
+    public void runTest(boolean type){
         swapType = type;
-        testIt();
+        // results is de tabel met resultaten
+        results = new int[NUMBER][3];
+        scoreHeuristic = new int[NUMBER];
+
+        Genome gen = new Genome();
+        testSet = gen.makeTestSet(NUMBER, swapType);
+
+        runHeuristic(testSet);
+        runRandomSol(testSet);
+
+        printTest();
+    }
+
+    public void printTest(){
         for(int i = 0; i < NUMBER; i++){
             int no = i+1;
             System.out.println("Genome no. "+ no);
@@ -38,74 +45,57 @@ public class TestAndScore {
             System.out.println("Heuristic percentile: " + getPercentile(i));
 
         }
-        // tabel printen
-        for(int j = 0; j < 3; j++){
-            System.out.println("Nummer: " + j);
-            for(int k = 0; k<NUMBER; k++){
-                System.out.println(results[k][j]);
-            }
-
+        // tabel printen: S = aantal swaps, MG = moved Genes, PC = percentile
+        System.out.println("S \t MG \t PC");
+        for (int j = 0; j < NUMBER; j++){
+            System.out.println(results[j][0]+"\t"+results[j][1]+"\t"+
+            results[j][2]);
         }
     }
-
-    /** Deze functie maakt eerst een testset van 100 willekeurige genomen, gaat deze dan heuristisch oplossen.
-     * (Zoals jij wil, pas t evt. aan in GenomeComparator). Daarna gaat hij t random oplossen.
-     *
-     */
-    public void testIt(){
-        // results is de tabel met resultaten
-        results = new int[NUMBER][3];
-        scoreHeuristic = new int[NUMBER];
-        Genome gen = new Genome();
-        testSet = gen.makeTestSet(NUMBER, swapType);
-        makeHeuristic(testSet);
-        scoreHeuristic = new int[NUMBER];
-        makeRandomSol(testSet);
-
-    }
-
-    private void makeHeuristic(Genome[] testSet) {
+    private void runHeuristic(Genome[] testSet) {
         this.heuristic = new Genome[NUMBER];
+
         for (int i = 0; i < NUMBER; i++) {
             Astar trial = new Astar(testSet[i], swapType);
             trial.findSolution();
+
+            // pak de uiteindelijke oplossing en sla die op
             Genome finalgen = trial.getFinalGen();
             heuristic[i] = finalgen;
             results[i][0] = finalgen.getCountSwaps();
-            scoreHeuristic[i] = finalgen.getCountSwaps();
-            results[i][1] = finalgen.getCountSwaps();
+            results[i][1] = finalgen.getcountDistance();
+            scoreHeuristic[i] = (int)finalgen.getScore();
             //System.out.println(i);
         }
     }
 
-    private void makeRandomSol(Genome[] testSet) {
-        this.rSol = new RandomSolution[NUMBER];
+    private void runRandomSol(Genome[] testSet) {
+        randomSol = new RandomSolution[NUMBER];
+
         for (int i = 0; i < NUMBER; i++){
             RandomSolution trial = new RandomSolution(testSet[i]);
             trial.findSolutions();
-            rSol[i] = trial;
+            randomSol[i] = trial;
         }
-
     }
 
     private double getPercentile(int index){
-        int[] ranScores = rSol[index].getRandomScores();
+        int[] ranScores = randomSol[index].getRandomScores();
         int prepercentile = 0;
         Arrays.sort(ranScores);
+
+        // Een loop door de gesorteerde random oplossingen, wanneer er een
+        // oplossing is die beter is dan die gevonden door het heuristische
+        // algoritme, wordt deze waarde opgeslagen
         for (int i = 0; i < ranScores.length; i++){
             if(ranScores[i]>scoreHeuristic[index] ){
                 prepercentile = i;
             }
         }
         prepercentile = ranScores.length - prepercentile;
-        double percentile = (prepercentile/ranScores.length)*100 ;
-        System.out.println();
-        //for(int i = 0; i < 25; i++ ){
-            //System.out.print(ranScores[i]+" ");
-        //}
+        double percentile = 100 - (prepercentile/ranScores.length)*100 ;
         results[index][2]= (int) percentile;
-        return 100 - percentile;
+        return percentile;
     }
-
 
 }

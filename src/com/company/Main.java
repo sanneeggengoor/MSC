@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        /*
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Typ 1 voor optimaliseren op aantal omkeringen");
         System.out.println("Typ 2 voor optimaliseren op aantal verplaatste allelen");
@@ -20,13 +20,13 @@ public class Main {
         int index = scanner.nextInt();
 
         boolean swapType = true;
-        if(index == 2){
+        if (index == 2) {
             swapType = false;
         }
-        Genome gen = new Genome();
         TestAndScore trial = new TestAndScore();
-        trial.printTest(swapType);
-        */
+        trial.runTest(swapType);
+    }
+        /*
         Genome gen = new Genome();
         Astar trial = new Astar(gen, true);
         trial.findSolution();
@@ -39,5 +39,5 @@ public class Main {
 
         //Genome[] testSet = gen.makeTestSet();
 
-    }
+    }*/
 }
