@@ -4,13 +4,12 @@ import java.util.Arrays;
 
 public class TestAndScore {
     private boolean swapType;
-    private boolean genomeType;
     private int[][] results;
     private Genome[] testSet;
     private Genome[] heuristic;
     private RandomSolution[] randomSol;
     private int[] scoreHeuristic;
-    public static final int NUMBER = 10;
+    public static final int NUMBER = 100;
 
     public TestAndScore(){
         Genome[] testSet;

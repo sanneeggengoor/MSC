@@ -48,16 +48,17 @@ public class Astar {
     private void createChildrenPrior() {
         Genome parent = genomePrior.poll();
         for (int i = 1; i < 25; i++) {
+            if(parent.forbiddenBefore(i)) {
+                for (int j = i; j < 26; j++) {
+                    if (parent.forbiddenAfter(j)) {
+                        Genome child = parent.invert(i, j);
+                        child.changeType(swapType);
+                        addChild(child);
+                        countStates++;
 
-            for (int j = i; j < 26; j++) {
-                if(parent.forbiddenBefore(i) && parent.forbiddenAfter(j)) {
-                    Genome child = parent.invert(i, j);
-                    child.changeType(swapType);
-                    addChild(child);
-                    countStates++;
-
-                    if(solutionFound) {
-                        return;
+                        if (solutionFound) {
+                            return;
+                        }
                     }
                 }
             }

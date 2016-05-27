@@ -29,7 +29,7 @@ public class Genome {
         scoreDistance = 0;
     }
 
-    // waarom wordt dit nooit gebruikt? Hebben we het dan wel nodig?
+
     public Genome(Genome genome) {
         this.countSwaps = genome.countSwaps;
         this.countDistance = genome.countDistance;
@@ -64,16 +64,10 @@ public class Genome {
     public Genome[] makeTestSet(int number, boolean type) {
         swapType = type;
         Genome[] testSet = new Genome[number];
-        rgen.setSeed(2);
-    /*
-        for(int j = 0; j<33; j++){
-            for(int k = 0; k<25; k++){
-                int hoi = rgen.nextInt();
-            }
-        }
-        */
+
+        rgen.setSeed(5);
         for (int i = 0; i<number; i++){
-            testSet[i] = new Genome(genomeType, scoreType);
+            testSet[i] = new Genome(genomeType, scoreType  );
         }
         return testSet;
     }
