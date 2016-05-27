@@ -11,8 +11,8 @@ public class Astar {
     private boolean solutionFound;
     private long countStates;
 
-    public Astar(Genome gen, boolean type) {
-        swapType= type;
+    public Astar(Genome gen, boolean type_swap) {
+        swapType= type_swap;
         genomePrior = new PriorityQueue<>(comparator);
         this.gen = gen;
         solutionFound = false;

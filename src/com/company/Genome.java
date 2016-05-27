@@ -6,24 +6,30 @@ public class Genome {
     public int[] genome;
     private int countSwaps;
     private int countDistance;
-    private int movedGenes;
     private double scoreSwap;
     private double scoreDistance;
     private Genome previous;
     private boolean swapType;
+    private boolean genomeType;
+    private boolean scoreType;
 
     private static Random rgen = new Random();
 
-    public Genome() {
-        //genome = createGenome();
-        genome = createRandomGenome();
+    public Genome(boolean type_genome, boolean type_astar) {
+        genomeType = type_genome;
+        scoreType = type_astar;
+        if(genomeType) {
+            genome = createGenome();
+        } else {
+            genome = createRandomGenome();
+        }
         countSwaps = 0;
         countDistance = 0;
-        movedGenes = 0;
         scoreSwap = 24;
         scoreDistance = 0;
     }
 
+    // waarom wordt dit nooit gebruikt? Hebben we het dan wel nodig?
     public Genome(Genome genome) {
         this.countSwaps = genome.countSwaps;
         this.countDistance = genome.countDistance;
@@ -67,7 +73,7 @@ public class Genome {
         }
         */
         for (int i = 0; i<number; i++){
-            testSet[i] = new Genome();
+            testSet[i] = new Genome(genomeType, scoreType);
         }
         return testSet;
     }
@@ -75,6 +81,8 @@ public class Genome {
     public Genome invert(int a, int b){
         int[] inverseGen = new int[25];
         Genome child = new Genome(this);
+        child.genomeType = this.genomeType;
+        child.scoreType = this.scoreType;
         for(int i = a; i<=b; i++){
             int x = b - i + a;
             inverseGen[i-1] = child.genome[x-1];
@@ -83,8 +91,8 @@ public class Genome {
         child.previous = this;
         child.countSwaps = this.countSwaps + 1;
         child.countDistance = this.countDistance + Math.abs(a - b) + 1;
-        child.scoreSwap = child.aStarscoreSwaps();
-        child.scoreDistance = child.aStarscoreDistance();
+        child.scoreSwap = child.aStarscoreSwaps(scoreType);
+        child.scoreDistance = child.aStarscoreDistance(scoreType);
 
         return child;
     }
@@ -131,18 +139,20 @@ public class Genome {
         return !(invert < 24 && (row[invert] == gen + 1 | row[invert] == gen - 1));
     }
 
-
-    public double aStarscoreSwaps(){
+    public double aStarscoreSwaps(boolean astar){
         double estimate = 0;
         for (int i = 1; i < 25; i++ ){
             if(forbiddenAfter(i)){
                 estimate++;
             }
         }
+        if (astar) {
+            return estimate/2 + this.countSwaps;
+        }
         return estimate/1.5 + this.countSwaps;
     }
 
-    public double aStarscoreDistance(){
+    public double aStarscoreDistance(boolean astar){
         double estimate = 0;
         int[] gen = this.genome;
         for (int i = 1; i < 25; i++ ){
@@ -150,17 +160,10 @@ public class Genome {
                 estimate++;
             }
         }
-        double invert = 0;
-        for (int j = 1; j < 25; j++){
-            if(previous.forbiddenAfter(j)){
-                invert++;
-            }
+        if (astar) {
+            return estimate + this.countDistance;
         }
-        invert = invert - estimate;
-        if (invert<=5){
-            estimate = estimate/2;
-        }
-        return estimate*9 + this.countDistance;
+        return estimate*10 + this.countDistance;
     }
 
     public void printPath(){
@@ -175,8 +178,8 @@ public class Genome {
         }
     }
 
-    public void changeType(boolean type){
-        swapType = type;
+    public void changeType(boolean type_swap){
+        swapType = type_swap;
     }
 
     public boolean IsSolution() {
@@ -185,7 +188,6 @@ public class Genome {
                 return false;
             }
         }
-        //System.out.println("Solution found" + this);
         return true;
     }
 
@@ -195,22 +197,14 @@ public class Genome {
     }
 
     public double getScore(){
-        if (swapType== true){
+        if (swapType){
             return scoreSwap;
         } else {
             return scoreDistance;
         }
     }
 
-    public double getscoreSwap() {
-        return scoreSwap;
-    }
-
     public int getcountDistance() {
         return countDistance;
-    }
-
-    public double getscoreDistance() {
-        return scoreDistance;
     }
 }
