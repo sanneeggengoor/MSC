@@ -59,12 +59,13 @@ public class Genome {
         swapType = type;
         Genome[] testSet = new Genome[number];
         rgen.setSeed(2);
-
+    /*
         for(int j = 0; j<33; j++){
             for(int k = 0; k<25; k++){
                 int hoi = rgen.nextInt();
             }
         }
+        */
         for (int i = 0; i<number; i++){
             testSet[i] = new Genome();
         }
@@ -148,6 +149,16 @@ public class Genome {
             if(forbiddenAfter(i)){
                 estimate++;
             }
+        }
+        double invert = 0;
+        for (int j = 1; j < 25; j++){
+            if(previous.forbiddenAfter(j)){
+                invert++;
+            }
+        }
+        invert = invert - estimate;
+        if (invert<=5){
+            estimate = estimate/2;
         }
         return estimate*9 + this.countDistance;
     }

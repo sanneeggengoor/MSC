@@ -9,7 +9,7 @@ public class TestAndScore {
     private Genome[] heuristic;
     private RandomSolution[] randomSol;
     private int[] scoreHeuristic;
-    public static final int NUMBER = 33;
+    public static final int NUMBER = 10;
 
     public TestAndScore(){
         Genome[] testSet;
