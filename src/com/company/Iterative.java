@@ -80,6 +80,20 @@ public class Iterative {
         return minTime;
     }
 
+    private void createChildrenStack() {
+        Genome parent = genomeStack.pop();
+        for (int i = 1; i < 25; i++) {
+            for (int j = i; j < 26; j++) {
+                Genome child = parent.invert(i, j);
+                addChild(child);
+                countStates++;
+                if (solutionFound) {
+                    return;
+                }
+            }
+        }
+    }
+
     private void createChildrenStack_Heuristic() {
         Genome parent = genomeStack.pop();
         for (int i = 1; i < 25; i++) {
@@ -91,20 +105,6 @@ public class Iterative {
                     if (solutionFound) {
                         return;
                     }
-                }
-            }
-        }
-    }
-
-    private void createChildrenStack() {
-        Genome parent = genomeStack.pop();
-        for (int i = 1; i < 25; i++) {
-            for (int j = i; j < 26; j++) {
-                Genome child = parent.invert(i, j);
-                addChild(child);
-                countStates++;
-                if (solutionFound) {
-                    return;
                 }
             }
         }

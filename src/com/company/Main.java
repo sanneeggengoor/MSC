@@ -16,7 +16,7 @@ public class Main {
         System.out.println("Typ 1 voor het uitvoeren van het eerste algoritme");
         System.out.println("Typ 2 voor het uitvoeren van Iterative Depth First zonder heuristiek");
         System.out.println("Typ 3 voor het uitvoeren van Iterative Depth First met heuristiek");
-        System.out.println("Typ 4 voor het uitvoeren van Astar");
+        System.out.println("Typ 4 voor het uitvoeren van A*");
         System.out.println("Typ 5 voor het uitvoeren van het heuristische algoritme");
         System.out.println("Typ 6 voor het uitvoeren van het heuristische algoritme op een testset van 100 genomen");
         System.out.print("Geef keuze: ");
