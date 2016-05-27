@@ -34,13 +34,15 @@ public class Astar {
             }
         }
 
-        // als er een oplossing is gevonden zit deze niet automatisch bovenaan, want er zijn nog meer kinderen
-        // gemaakt hierna. Dus moet er van de bovenkant afgehaald worden totdat de oplossing wel gevonden is.
+        // als er een oplossing is gevonden zit deze niet automatisch bovenaan,
+        // want er zijn nog meer kinderen gemaakt hierna. Dus moet er van de
+        // bovenkant afgehaald worden totdat de oplossing wel gevonden is.
         Genome finalgen = genomePrior.poll();
         while(!finalgen.IsSolution()) {
             finalgen = genomePrior.poll();
         }
-        // daarna wordt hij weer teruggelegd zodat hij zo weer teruggevonden kan worden.
+        // daarna wordt hij weer teruggelegd zodat hij zo weer teruggevonden
+        // kan worden.
         genomePrior.add(finalgen);
         finalgen.printPath();
     }

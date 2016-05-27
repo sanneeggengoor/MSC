@@ -7,7 +7,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("Typ 1 voor het toepassen van algoritmes op het gegeven genoom");
         System.out.println("Typ 2 voor het toepassen van algoritmes op een random genoom");

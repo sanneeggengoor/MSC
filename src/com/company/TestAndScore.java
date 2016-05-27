@@ -61,7 +61,7 @@ public class TestAndScore {
             Astar trial = new Astar(testSet[i], swapType);
             trial.findSolution();
 
-            // pak de uiteindelijke oplossing en sla die op
+            // pakt de uiteindelijke oplossing en slaat die op
             Genome finalgen = trial.getFinalGen();
             heuristic[i] = finalgen;
             results[i][0] = finalgen.getCountSwaps();

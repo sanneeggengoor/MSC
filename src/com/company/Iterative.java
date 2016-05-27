@@ -20,7 +20,8 @@ public class Iterative {
         minTime = 10000;
     }
 
-    // findSolution(true) calculates the solution using the heuristic
+    // de variabele heuristic geeft aan of de heuristiek wel (true) of niet
+    // (false) gebruikt wordt
     public void findSolution(boolean heuristic){
         countStates = 0;
         maxDepth = 1;
@@ -44,9 +45,9 @@ public class Iterative {
         }
     }
 
-    // Returns the shortest time the algorithm reached depth 3 after
-    // number_iterations iterations
-    // The boolean heuristic tells if the heuristic is used
+    // berekent de snelste tijd waarin het iterative depth first algoritme
+    // met of zonder heuristiek in number_iterations iteraties laag 3 kan
+    // bereiken
     public long reachDepth3(int number_iterations, boolean heuristic) {
         for (int i = 0; i < number_iterations; i++) {
             countStates = 0;
